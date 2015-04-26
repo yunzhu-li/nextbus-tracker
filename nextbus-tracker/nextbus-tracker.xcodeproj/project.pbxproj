@@ -1,0 +1,332 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		797393D41AE99DA900CB1D32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797393C91AE99DA900CB1D32 /* Images.xcassets */; };
+		797393D51AE99DA900CB1D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797393CB1AE99DA900CB1D32 /* Main.storyboard */; };
+		797393D61AE99DA900CB1D32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797393CE1AE99DA900CB1D32 /* AppDelegate.swift */; };
+		797393D71AE99DA900CB1D32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797393D11AE99DA900CB1D32 /* ViewController.swift */; };
+		797393DA1AE99DDB00CB1D32 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 797393D91AE99DDB00CB1D32 /* Launch Screen.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		797393A11AE99C7200CB1D32 /* nextbus-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nextbus-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		797393C91AE99DA900CB1D32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		797393CB1AE99DA900CB1D32 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		797393CE1AE99DA900CB1D32 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		797393D11AE99DA900CB1D32 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		797393D31AE99DA900CB1D32 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		797393D91AE99DDB00CB1D32 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7973939E1AE99C7200CB1D32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		797393981AE99C7200CB1D32 = {
+			isa = PBXGroup;
+			children = (
+				797393A31AE99C7200CB1D32 /* nextbus-tracker */,
+				797393A21AE99C7200CB1D32 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		797393A21AE99C7200CB1D32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				797393A11AE99C7200CB1D32 /* nextbus-tracker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		797393A31AE99C7200CB1D32 /* nextbus-tracker */ = {
+			isa = PBXGroup;
+			children = (
+				797393CC1AE99DA900CB1D32 /* src */,
+				797393C81AE99DA900CB1D32 /* res */,
+				797393D21AE99DA900CB1D32 /* supporting */,
+			);
+			path = "nextbus-tracker";
+			sourceTree = "<group>";
+		};
+		797393C81AE99DA900CB1D32 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				797393C91AE99DA900CB1D32 /* Images.xcassets */,
+				797393CA1AE99DA900CB1D32 /* ui */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		797393CA1AE99DA900CB1D32 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				797393CB1AE99DA900CB1D32 /* Main.storyboard */,
+				797393D91AE99DDB00CB1D32 /* Launch Screen.xib */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		797393CC1AE99DA900CB1D32 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				797393CD1AE99DA900CB1D32 /* main */,
+				797393CF1AE99DA900CB1D32 /* models */,
+				797393D01AE99DA900CB1D32 /* viewcontrollers */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		797393CD1AE99DA900CB1D32 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				797393CE1AE99DA900CB1D32 /* AppDelegate.swift */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		797393CF1AE99DA900CB1D32 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		797393D01AE99DA900CB1D32 /* viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				797393D11AE99DA900CB1D32 /* ViewController.swift */,
+			);
+			path = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		797393D21AE99DA900CB1D32 /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				797393D31AE99DA900CB1D32 /* Info.plist */,
+			);
+			path = supporting;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		797393A01AE99C7200CB1D32 /* nextbus-tracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 797393C01AE99C7300CB1D32 /* Build configuration list for PBXNativeTarget "nextbus-tracker" */;
+			buildPhases = (
+				7973939D1AE99C7200CB1D32 /* Sources */,
+				7973939E1AE99C7200CB1D32 /* Frameworks */,
+				7973939F1AE99C7200CB1D32 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "nextbus-tracker";
+			productName = "nextbus-tracker";
+			productReference = 797393A11AE99C7200CB1D32 /* nextbus-tracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		797393991AE99C7200CB1D32 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Yunzhu Li";
+				TargetAttributes = {
+					797393A01AE99C7200CB1D32 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 67THR6ABFT;
+					};
+				};
+			};
+			buildConfigurationList = 7973939C1AE99C7200CB1D32 /* Build configuration list for PBXProject "nextbus-tracker" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 797393981AE99C7200CB1D32;
+			productRefGroup = 797393A21AE99C7200CB1D32 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				797393A01AE99C7200CB1D32 /* nextbus-tracker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7973939F1AE99C7200CB1D32 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				797393D41AE99DA900CB1D32 /* Images.xcassets in Resources */,
+				797393DA1AE99DDB00CB1D32 /* Launch Screen.xib in Resources */,
+				797393D51AE99DA900CB1D32 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7973939D1AE99C7200CB1D32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				797393D71AE99DA900CB1D32 /* ViewController.swift in Sources */,
+				797393D61AE99DA900CB1D32 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		797393BE1AE99C7300CB1D32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		797393BF1AE99C7300CB1D32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		797393C11AE99C7300CB1D32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "nextbus-tracker/supporting/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		797393C21AE99C7300CB1D32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "nextbus-tracker/supporting/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7973939C1AE99C7200CB1D32 /* Build configuration list for PBXProject "nextbus-tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				797393BE1AE99C7300CB1D32 /* Debug */,
+				797393BF1AE99C7300CB1D32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		797393C01AE99C7300CB1D32 /* Build configuration list for PBXNativeTarget "nextbus-tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				797393C11AE99C7300CB1D32 /* Debug */,
+				797393C21AE99C7300CB1D32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 797393991AE99C7200CB1D32 /* Project object */;
+}
