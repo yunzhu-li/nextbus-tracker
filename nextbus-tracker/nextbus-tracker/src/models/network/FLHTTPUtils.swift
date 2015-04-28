@@ -26,28 +26,32 @@ class FLHTTPUtils {
     static private var FLDefaultTimeoutInterval: NSTimeInterval = 5;
     
     /* PercentEscape Encoder */
-    static func encodeToPercentEscapeString(input: String) -> String {
-        return input.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!;
+    static func encodeToPercentEscapeString(input: String) -> String? {
+        return input.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding);
     }
     
     /* Send asynchronous request */
-    static func sendAsynchronousRequest(urlString: String, parameters: Dictionary<String, String>?, timeoutInterval: NSTimeInterval?, completionHandler: (NSURLResponse!, NSData!, NSError!) -> Void) {
+    static func sendAsynchronousRequest(urlString: String, param_keys: [String]?, param_values: [String]?, timeoutInterval: NSTimeInterval?, completionHandler: (NSURLResponse!, NSData!, NSError!) -> Void) {
         var _urlString = String(urlString);
         var isFirstParam = true;
         
         // Append parameters
-        if let _parameters = parameters {
-            for _key in _parameters.keys {
-                // New field
-                if (isFirstParam) {
-                    isFirstParam = false;
-                    _urlString += "?";
-                } else {
-                    _urlString += "&";
+        if let _param_keys = param_keys {
+            if let _param_values = param_values {
+                // Perform check
+                assert(_param_keys.count == _param_values.count, "The number of keys and values must be equal.");
+                for (var i = 0; i < _param_keys.count; i++) {
+                    // New field
+                    if (isFirstParam) {
+                        isFirstParam = false;
+                        _urlString += "?";
+                    } else {
+                        _urlString += "&";
+                    }
+                    
+                    // Append value
+                    _urlString += self.encodeToPercentEscapeString(_param_keys[i])! + "=" + self.encodeToPercentEscapeString(_param_values[i])!;
                 }
-                
-                // Append value
-                _urlString += self.encodeToPercentEscapeString(_key) + "=" + self.encodeToPercentEscapeString(_parameters[_key]!);
             }
         }
         
