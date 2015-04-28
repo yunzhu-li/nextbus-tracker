@@ -1,7 +1,7 @@
 //
 //  This file is part of Nextbus Tracker.
 //
-//  Created by Yunzhu Li on 04/27/15.
+//  Created by Yunzhu Li on 04/28/15.
 //  Copyright (c) 2015 Yunzhu Li.
 //
 //  Nextbus Tracker is free software: you can redistribute
@@ -21,4 +21,11 @@
 //
 
 import Foundation
+import UIKit
 
+class NTTblCellBookmarks: UITableViewCell {
+    
+    @IBOutlet weak var lblStop: UILabel!
+    @IBOutlet weak var lblPredictions: UILabel!
+        
+}
