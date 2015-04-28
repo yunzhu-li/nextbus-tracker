@@ -7,19 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791D86B41AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */; };
+		791D86B61AEEEFCC00BCF9AA /* FLHTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */; };
+		791D86B81AEF03C300BCF9AA /* NTMNextbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */; };
+		791D86BD1AEF27CE00BCF9AA /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 791D86BC1AEF27CE00BCF9AA /* XMLDictionary.m */; };
+		791D86C21AEF4E9600BCF9AA /* NTTblCellBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86C11AEF4E9600BCF9AA /* NTTblCellBookmarks.swift */; };
+		7941BCA51AEED37000DB88D7 /* NTVCBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */; };
 		797393D41AE99DA900CB1D32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797393C91AE99DA900CB1D32 /* Images.xcassets */; };
 		797393D51AE99DA900CB1D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797393CB1AE99DA900CB1D32 /* Main.storyboard */; };
 		797393D61AE99DA900CB1D32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797393CE1AE99DA900CB1D32 /* AppDelegate.swift */; };
-		797393D71AE99DA900CB1D32 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797393D11AE99DA900CB1D32 /* ViewController.swift */; };
 		797393DA1AE99DDB00CB1D32 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 797393D91AE99DDB00CB1D32 /* Launch Screen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLLocalStorageUtils.swift; sourceTree = "<group>"; };
+		791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLHTTPUtils.swift; sourceTree = "<group>"; };
+		791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMNextbus.swift; sourceTree = "<group>"; };
+		791D86BB1AEF27CE00BCF9AA /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = XMLDictionary/XMLDictionary.h; sourceTree = "<group>"; };
+		791D86BC1AEF27CE00BCF9AA /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = XMLDictionary/XMLDictionary.m; sourceTree = "<group>"; };
+		791D86C01AEF3E1800BCF9AA /* nextbus-tracker-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "nextbus-tracker-Bridging-Header.h"; sourceTree = "<group>"; };
+		791D86C11AEF4E9600BCF9AA /* NTTblCellBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTblCellBookmarks.swift; sourceTree = "<group>"; };
+		7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCBookmarks.swift; sourceTree = "<group>"; };
 		797393A11AE99C7200CB1D32 /* nextbus-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nextbus-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		797393C91AE99DA900CB1D32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		797393CB1AE99DA900CB1D32 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		797393CE1AE99DA900CB1D32 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		797393D11AE99DA900CB1D32 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		797393D31AE99DA900CB1D32 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		797393D91AE99DDB00CB1D32 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -35,6 +47,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		791D86B11AEEEC3000BCF9AA /* local */ = {
+			isa = PBXGroup;
+			children = (
+				791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */,
+			);
+			path = local;
+			sourceTree = "<group>";
+		};
+		791D86B21AEEEC3000BCF9AA /* network */ = {
+			isa = PBXGroup;
+			children = (
+				791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		791D86B91AEF27A000BCF9AA /* thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				791D86BB1AEF27CE00BCF9AA /* XMLDictionary.h */,
+				791D86BC1AEF27CE00BCF9AA /* XMLDictionary.m */,
+			);
+			path = thirdparty;
+			sourceTree = "<group>";
+		};
+		7941BCA31AEED37000DB88D7 /* bookmarks */ = {
+			isa = PBXGroup;
+			children = (
+				7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */,
+				791D86C11AEF4E9600BCF9AA /* NTTblCellBookmarks.swift */,
+			);
+			path = bookmarks;
+			sourceTree = "<group>";
+		};
 		797393981AE99C7200CB1D32 = {
 			isa = PBXGroup;
 			children = (
@@ -82,9 +128,10 @@
 		797393CC1AE99DA900CB1D32 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				797393CD1AE99DA900CB1D32 /* main */,
+				791D86B91AEF27A000BCF9AA /* thirdparty */,
 				797393CF1AE99DA900CB1D32 /* models */,
 				797393D01AE99DA900CB1D32 /* viewcontrollers */,
+				797393CD1AE99DA900CB1D32 /* main */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -92,6 +139,7 @@
 		797393CD1AE99DA900CB1D32 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				791D86C01AEF3E1800BCF9AA /* nextbus-tracker-Bridging-Header.h */,
 				797393CE1AE99DA900CB1D32 /* AppDelegate.swift */,
 			);
 			path = main;
@@ -100,6 +148,9 @@
 		797393CF1AE99DA900CB1D32 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				791D86B11AEEEC3000BCF9AA /* local */,
+				791D86B21AEEEC3000BCF9AA /* network */,
+				791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -107,7 +158,7 @@
 		797393D01AE99DA900CB1D32 /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
-				797393D11AE99DA900CB1D32 /* ViewController.swift */,
+				7941BCA31AEED37000DB88D7 /* bookmarks */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";
@@ -191,8 +242,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				797393D71AE99DA900CB1D32 /* ViewController.swift in Sources */,
+				7941BCA51AEED37000DB88D7 /* NTVCBookmarks.swift in Sources */,
+				791D86C21AEF4E9600BCF9AA /* NTTblCellBookmarks.swift in Sources */,
+				791D86B41AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift in Sources */,
 				797393D61AE99DA900CB1D32 /* AppDelegate.swift in Sources */,
+				791D86B61AEEEFCC00BCF9AA /* FLHTTPUtils.swift in Sources */,
+				791D86B81AEF03C300BCF9AA /* NTMNextbus.swift in Sources */,
+				791D86BD1AEF27CE00BCF9AA /* XMLDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,10 +344,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "nextbus-tracker/supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "nextbus-tracker/src/main/nextbus-tracker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -299,10 +358,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "nextbus-tracker/supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "nextbus-tracker/src/main/nextbus-tracker-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -325,6 +386,7 @@
 				797393C21AE99C7300CB1D32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
