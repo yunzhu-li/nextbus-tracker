@@ -1,9 +1,23 @@
 //
-//  AppDelegate.swift
-//  nextbus-tracker
+//  This file is part of Nextbus Tracker.
 //
 //  Created by Yunzhu Li on 04/23/15.
-//  Copyright (c) 2015 Yunzhu Li. All rights reserved.
+//  Copyright (c) 2015 Yunzhu Li.
+//
+//  Nextbus Tracker is free software: you can redistribute
+//  it and/or modify it under the terms of the GNU General
+//  Public License version 3 as published by the Free 
+//  Software Foundation.
+//
+//  Nextbus Tracker is distributed in the hope that it will
+//  be useful, but WITHOUT ANY WARRANTY; without even the 
+//  implied warranty of MERCHANTABILITY or FITNESS FOR A
+//  PARTICULAR PURPOSE. See the GNU General Public License
+//  for more details.
+//
+//  You should have received a copy of the GNU General Public
+//  License along with Nextbus Tracker.
+//  If not, see http://www.gnu.org/licenses/.
 //
 
 import UIKit
@@ -11,11 +25,11 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
-
+    var window: UIWindow?;
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.sharedApplication().statusBarStyle = .LightContent;
         return true
     }
 
