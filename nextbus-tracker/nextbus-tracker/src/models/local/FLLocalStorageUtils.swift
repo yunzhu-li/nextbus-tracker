@@ -22,3 +22,17 @@
 
 import Foundation
 
+class FLLocalStorageUtils {
+    
+    /* Read an object from User Defaults */
+    static func readObjectFromUserDefaults(key: String) -> AnyObject? {
+        return NSUserDefaults.standardUserDefaults().objectForKey(key);
+    }
+
+    /* Write an object to User Defaults */
+    static func writeObjectToUserDefaults(key: String, object: AnyObject?){
+        let ud = NSUserDefaults.standardUserDefaults();
+        ud.setObject(object, forKey: key);
+        ud.synchronize();
+    }
+}
