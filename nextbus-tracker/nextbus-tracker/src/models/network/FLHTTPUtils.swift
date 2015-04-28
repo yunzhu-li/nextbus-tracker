@@ -25,13 +25,12 @@ import Foundation
 class FLHTTPUtils {
     static private var FLDefaultTimeoutInterval: NSTimeInterval = 5;
     
+    /* PercentEscape Encoder */
     static func encodeToPercentEscapeString(input: String) -> String {
-        // Encode all the reserved characters, per RFC 3986
-        // (<http://www.ietf.org/rfc/rfc3986.txt>)
-        
         return input.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!;
     }
     
+    /* Send asynchronous request */
     static func sendAsynchronousRequest(urlString: String, parameters: Dictionary<String, String>?, timeoutInterval: NSTimeInterval?, completionHandler: (NSURLResponse!, NSData!, NSError!) -> Void) {
         var _urlString = String(urlString);
         var isFirstParam = true;
