@@ -16,6 +16,13 @@
 		792434481AF0856000B3E256 /* NTVCStopSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434471AF0856000B3E256 /* NTVCStopSelector.swift */; };
 		7924344A1AF0856E00B3E256 /* NTTblCellStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434491AF0856E00B3E256 /* NTTblCellStops.swift */; };
 		7924344D1AF08D4000B3E256 /* NTVCAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7924344C1AF08D4000B3E256 /* NTVCAbout.swift */; };
+		7924345F1AF0B78000B3E256 /* Nextbus Tracker WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 7924345E1AF0B78000B3E256 /* Nextbus Tracker WatchKit App.app */; };
+		7924346C1AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 792434521AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7924347B1AF0B82700B3E256 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 792434751AF0B82700B3E256 /* Images.xcassets */; };
+		7924347C1AF0B82700B3E256 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434771AF0B82700B3E256 /* GlanceController.swift */; };
+		7924347D1AF0B82700B3E256 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434781AF0B82700B3E256 /* InterfaceController.swift */; };
+		792434851AF0B85700B3E256 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 792434801AF0B85700B3E256 /* Images.xcassets */; };
+		792434861AF0B85700B3E256 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792434821AF0B85700B3E256 /* Interface.storyboard */; };
 		7941BCA51AEED37000DB88D7 /* NTVCBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */; };
 		797393D41AE99DA900CB1D32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797393C91AE99DA900CB1D32 /* Images.xcassets */; };
 		797393D51AE99DA900CB1D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797393CB1AE99DA900CB1D32 /* Main.storyboard */; };
@@ -24,6 +31,37 @@
 		797D6EFF1AF0671C00596DCD /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D6EFE1AF0671C00596DCD /* XMLDictionary.m */; };
 		797D6F011AF0673100596DCD /* NTGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797D6F001AF0673100596DCD /* NTGlobal.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		792434601AF0B78000B3E256 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 797393991AE99C7200CB1D32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7924345D1AF0B78000B3E256;
+			remoteInfo = "Nextbus Tracker WatchKit App";
+		};
+		7924346A1AF0B78000B3E256 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 797393991AE99C7200CB1D32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 792434511AF0B78000B3E256;
+			remoteInfo = "Nextbus Tracker WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		792434731AF0B78100B3E256 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7924346C1AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLLocalStorageUtils.swift; sourceTree = "<group>"; };
@@ -36,6 +74,15 @@
 		792434471AF0856000B3E256 /* NTVCStopSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCStopSelector.swift; sourceTree = "<group>"; };
 		792434491AF0856E00B3E256 /* NTTblCellStops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTblCellStops.swift; sourceTree = "<group>"; };
 		7924344C1AF08D4000B3E256 /* NTVCAbout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCAbout.swift; sourceTree = "<group>"; };
+		792434521AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Nextbus Tracker WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7924345E1AF0B78000B3E256 /* Nextbus Tracker WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nextbus Tracker WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		792434751AF0B82700B3E256 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		792434771AF0B82700B3E256 /* GlanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		792434781AF0B82700B3E256 /* InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		7924347A1AF0B82700B3E256 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		792434801AF0B85700B3E256 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		792434821AF0B85700B3E256 /* Interface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
+		792434881AF0B8D100B3E256 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCBookmarks.swift; sourceTree = "<group>"; };
 		797393A11AE99C7200CB1D32 /* nextbus-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nextbus-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		797393C91AE99DA900CB1D32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -49,6 +96,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7924344F1AF0B78000B3E256 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7973939E1AE99C7200CB1D32 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,6 +155,75 @@
 			path = about;
 			sourceTree = "<group>";
 		};
+		792434531AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				792434761AF0B82700B3E256 /* src */,
+				792434741AF0B82700B3E256 /* res */,
+				792434791AF0B82700B3E256 /* supporting */,
+			);
+			path = "Nextbus Tracker WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		792434621AF0B78000B3E256 /* Nextbus Tracker WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				7924347F1AF0B85700B3E256 /* res */,
+				792434831AF0B85700B3E256 /* supporting */,
+			);
+			path = "Nextbus Tracker WatchKit App";
+			sourceTree = "<group>";
+		};
+		792434741AF0B82700B3E256 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				792434751AF0B82700B3E256 /* Images.xcassets */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		792434761AF0B82700B3E256 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				792434771AF0B82700B3E256 /* GlanceController.swift */,
+				792434781AF0B82700B3E256 /* InterfaceController.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		792434791AF0B82700B3E256 /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				7924347A1AF0B82700B3E256 /* Info.plist */,
+			);
+			path = supporting;
+			sourceTree = "<group>";
+		};
+		7924347F1AF0B85700B3E256 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				792434801AF0B85700B3E256 /* Images.xcassets */,
+				792434811AF0B85700B3E256 /* ui */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		792434811AF0B85700B3E256 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				792434821AF0B85700B3E256 /* Interface.storyboard */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
+		792434831AF0B85700B3E256 /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				792434881AF0B8D100B3E256 /* Info.plist */,
+			);
+			path = supporting;
+			sourceTree = "<group>";
+		};
 		7941BCA31AEED37000DB88D7 /* bookmarks */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				797393A31AE99C7200CB1D32 /* nextbus-tracker */,
+				792434531AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension */,
+				792434621AF0B78000B3E256 /* Nextbus Tracker WatchKit App */,
 				797393A21AE99C7200CB1D32 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -122,6 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				797393A11AE99C7200CB1D32 /* nextbus-tracker.app */,
+				792434521AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension.appex */,
+				7924345E1AF0B78000B3E256 /* Nextbus Tracker WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,6 +359,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		792434511AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 792434701AF0B78100B3E256 /* Build configuration list for PBXNativeTarget "Nextbus Tracker WatchKit Extension" */;
+			buildPhases = (
+				7924344E1AF0B78000B3E256 /* Sources */,
+				7924344F1AF0B78000B3E256 /* Frameworks */,
+				792434501AF0B78000B3E256 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				792434611AF0B78000B3E256 /* PBXTargetDependency */,
+			);
+			name = "Nextbus Tracker WatchKit Extension";
+			productName = "Nextbus Tracker WatchKit Extension";
+			productReference = 792434521AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		7924345D1AF0B78000B3E256 /* Nextbus Tracker WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7924346D1AF0B78100B3E256 /* Build configuration list for PBXNativeTarget "Nextbus Tracker WatchKit App" */;
+			buildPhases = (
+				7924345C1AF0B78000B3E256 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Nextbus Tracker WatchKit App";
+			productName = "Nextbus Tracker WatchKit App";
+			productReference = 7924345E1AF0B78000B3E256 /* Nextbus Tracker WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		797393A01AE99C7200CB1D32 /* nextbus-tracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 797393C01AE99C7300CB1D32 /* Build configuration list for PBXNativeTarget "nextbus-tracker" */;
@@ -239,10 +399,12 @@
 				7973939D1AE99C7200CB1D32 /* Sources */,
 				7973939E1AE99C7200CB1D32 /* Frameworks */,
 				7973939F1AE99C7200CB1D32 /* Resources */,
+				792434731AF0B78100B3E256 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7924346B1AF0B78000B3E256 /* PBXTargetDependency */,
 			);
 			name = "nextbus-tracker";
 			productName = "nextbus-tracker";
@@ -258,6 +420,13 @@
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Yunzhu Li";
 				TargetAttributes = {
+					792434511AF0B78000B3E256 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 67THR6ABFT;
+					};
+					7924345D1AF0B78000B3E256 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
 					797393A01AE99C7200CB1D32 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 67THR6ABFT;
@@ -278,11 +447,31 @@
 			projectRoot = "";
 			targets = (
 				797393A01AE99C7200CB1D32 /* nextbus-tracker */,
+				792434511AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension */,
+				7924345D1AF0B78000B3E256 /* Nextbus Tracker WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		792434501AF0B78000B3E256 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7924345F1AF0B78000B3E256 /* Nextbus Tracker WatchKit App.app in Resources */,
+				7924347B1AF0B82700B3E256 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7924345C1AF0B78000B3E256 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				792434861AF0B85700B3E256 /* Interface.storyboard in Resources */,
+				792434851AF0B85700B3E256 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7973939F1AE99C7200CB1D32 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -296,6 +485,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7924344E1AF0B78000B3E256 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7924347C1AF0B82700B3E256 /* GlanceController.swift in Sources */,
+				7924347D1AF0B82700B3E256 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7973939D1AE99C7200CB1D32 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,7 +516,76 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		792434611AF0B78000B3E256 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7924345D1AF0B78000B3E256 /* Nextbus Tracker WatchKit App */;
+			targetProxy = 792434601AF0B78000B3E256 /* PBXContainerItemProxy */;
+		};
+		7924346B1AF0B78000B3E256 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 792434511AF0B78000B3E256 /* Nextbus Tracker WatchKit Extension */;
+			targetProxy = 7924346A1AF0B78000B3E256 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		7924346E1AF0B78100B3E256 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = Nextbus_Tracker_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/Nextbus Tracker WatchKit App/supporting/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		7924346F1AF0B78100B3E256 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				IBSC_MODULE = Nextbus_Tracker_WatchKit_Extension;
+				INFOPLIST_FILE = "$(SRCROOT)/Nextbus Tracker WatchKit App/supporting/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
+		792434711AF0B78100B3E256 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Nextbus Tracker WatchKit Extension/supporting/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		792434721AF0B78100B3E256 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "$(SRCROOT)/Nextbus Tracker WatchKit Extension/supporting/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		797393BE1AE99C7300CB1D32 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -434,6 +701,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7924346D1AF0B78100B3E256 /* Build configuration list for PBXNativeTarget "Nextbus Tracker WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7924346E1AF0B78100B3E256 /* Debug */,
+				7924346F1AF0B78100B3E256 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		792434701AF0B78100B3E256 /* Build configuration list for PBXNativeTarget "Nextbus Tracker WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				792434711AF0B78100B3E256 /* Debug */,
+				792434721AF0B78100B3E256 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		7973939C1AE99C7200CB1D32 /* Build configuration list for PBXProject "nextbus-tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
