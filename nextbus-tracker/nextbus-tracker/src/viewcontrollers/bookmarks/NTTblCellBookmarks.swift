@@ -26,6 +26,7 @@ import UIKit
 class NTTblCellBookmarks: UITableViewCell {
     
     @IBOutlet weak var lblStop: UILabel!
+    @IBOutlet weak var lblRoute: UILabel!
     @IBOutlet weak var lblPredictions: UILabel!
-        
+    
 }
