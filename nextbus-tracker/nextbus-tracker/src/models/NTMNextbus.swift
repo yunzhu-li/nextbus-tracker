@@ -21,6 +21,7 @@
 //
 
 import Foundation
+import UIKit
 
 class NTMNextbus {
     static private var basicURL = "http://webservices.nextbus.com/service/publicXMLFeed";
@@ -35,7 +36,47 @@ class NTMNextbus {
     static let NTMKeyStop       = "s";
     static let NTMKeyMinutes    = "_minutes";
     
+    /* Get route configuration */
+    static func getRouteConfig(agency: String, dataHandler: (AnyObject?, NSError!) -> Void) -> Void {
+        
+        var param_keys: [String] = [], param_values: [String] = [];
+        param_keys.append(NTMKeyCommand); param_values.append("routeConfig");
+        param_keys.append(NTMKeyAgency);  param_values.append(agency);
+        
+        // Begin request
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
+        FLHTTPUtils.sendAsynchronousRequest(basicURL, param_keys: param_keys, param_values: param_values, timeoutInterval: nil) { (urlResponse, data, error) -> Void in
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
+            var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
+            if (dict != nil) {
+                dataHandler(dict, NSError(domain: "", code: 0, userInfo: nil));
+            }
+            dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
+        }
+    }
+    
+    /* Get route list by routeConfig data */
+    static func getRouteList(routeConfig: NSDictionary) -> [NSDictionary]? {
+        if let array = routeConfig["route"] as? [NSDictionary] {
+            return array;
+        } else {
+            return nil;
+        }
+    }
+    
+    /* Get stop list by routeConfig data */
+    static func getStopList(route: NSDictionary) -> [NSDictionary]? {
+        if let array = route["stop"] as? [NSDictionary] {
+            return array;
+        } else {
+            return nil;
+        }
+    }
+    
+    /* Prediction for multiple stops */
     static func getPredictionsForMultiStops(agency: String, routes: [String], directions: [String], stops: [String], dataHandler: (AnyObject?, NSError!) -> Void) -> Void {
+        
         assert(routes.count == stops.count && routes.count == directions.count, "The number of routes and directions and stops must be equal.");
         
         var param_keys: [String] = [], param_values: [String] = [];
@@ -48,9 +89,15 @@ class NTMNextbus {
             param_values.append(routes[i] + "|" + directions[i] + "|" + stops[i]);
         }
         
+        // Begin request
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
         FLHTTPUtils.sendAsynchronousRequest(basicURL, param_keys: param_keys, param_values: param_values, timeoutInterval: nil) { (urlResponse, data, error) -> Void in
-            var d = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
             var result: [[NSDictionary]] = [];
+            
+            //var dict = XMLDictionaryParser.sharedInstance().dictionaryWithString("<?xml version=\"1.0\" encoding=\"utf-8\" ?> <body copyright=\"All data copyright Rutgers Univ. Newark College Town Shuttle 2015.\"><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"Harrison Ave &amp; Passaic Ave\" stopTag=\"harrpass\">  <direction title=\"Loop\">  <prediction epochTime=\"1430259402212\" seconds=\"835\" minutes=\"13\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430261721215\" seconds=\"3154\" minutes=\"52\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430263868158\" seconds=\"5301\" minutes=\"88\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  </direction></predictions><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"NJIT\" stopTag=\"njit\">  <direction title=\"Loop\">  <prediction epochTime=\"1430258964074\" seconds=\"397\" minutes=\"6\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430261283077\" seconds=\"2716\" minutes=\"45\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430263456522\" seconds=\"4889\" minutes=\"81\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  </direction></predictions></body>");
+            
             var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
             if (dict != nil) {
                 if let predictions = dict["predictions"] as? NSArray {
@@ -93,45 +140,6 @@ class NTMNextbus {
                 return;
             }
             dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
-        }
-    }
-    
-    static func getPredictionsForSingleStop(agency: String, route: String, direction: String, stop: String, dataHandler: (AnyObject?, NSError!) -> Void) -> Void {
-        
-        var param_keys: [String] = [],      param_values: [String] = [];
-        param_keys.append(NTMKeyCommand);   param_values.append("predictions");
-        param_keys.append(NTMKeyAgency);    param_values.append(agency);
-        param_keys.append(NTMKeyRoute);     param_values.append(route);
-        param_keys.append(NTMKeyDirection); param_values.append(direction);
-        param_keys.append(NTMKeyStop);      param_values.append(stop);
-        
-        FLHTTPUtils.sendAsynchronousRequest(basicURL, param_keys: param_keys, param_values: param_values, timeoutInterval: nil) { (urlResponse, data, error) -> Void in
-            
-            //var dict = XMLDictionaryParser.sharedInstance().dictionaryWithString("<?xml version=\"1.0\" encoding=\"utf-8\" ?> <body copyright=\"All data copyright Rutgers Univ. Newark College Town Shuttle 2015.\"><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"NJIT\" stopTag=\"njit\">  <direction title=\"Loop\">  <prediction epochTime=\"1430187911952\" seconds=\"480\" minutes=\"8\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4209\" block=\"201\" />  <prediction epochTime=\"1430189009954\" seconds=\"1578\" minutes=\"26\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"202\" />  <prediction epochTime=\"1430190138975\" seconds=\"2707\" minutes=\"45\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4209\" block=\"201\" />  <prediction epochTime=\"1430191338975\" seconds=\"3907\" minutes=\"65\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"202\" />  <prediction epochTime=\"1430192538975\" seconds=\"5107\" minutes=\"85\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4209\" block=\"201\" />  </direction></predictions></body>");
-            
-            //var dict = XMLDictionaryParser.sharedInstance().dictionaryWithString("<?xml version=\"1.0\" encoding=\"utf-8\" ?> <body copyright=\"All data copyright Rutgers Univ. Newark College Town Shuttle 2015.\"><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"NJIT\" stopTag=\"njit\">  <direction title=\"Loop\">  <prediction epochTime=\"1430192538975\" seconds=\"1214\" minutes=\"20\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4209\" block=\"201\" /></direction></predictions></body>");
-            
-            var result: [NSDictionary] = [];
-            var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
-            if (dict != nil) {
-                if let predictions = dict["predictions"] as? NSDictionary {
-                    if let direction = predictions["direction"] as? NSDictionary {
-                        if let prediction = direction["prediction"] as? NSArray {
-                            for item in prediction {
-                                if let pred = item as? NSDictionary {
-                                    result.append(pred);
-                                }
-                            }
-                        }
-                        if let prediction = direction["prediction"] as? NSDictionary {
-                            result.append(prediction);
-                        }
-                    }
-                    dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
-                    return;
-                }
-            }
-            dataHandler([], NSError(domain: "", code: 1, userInfo: nil));
         }
     }
     
