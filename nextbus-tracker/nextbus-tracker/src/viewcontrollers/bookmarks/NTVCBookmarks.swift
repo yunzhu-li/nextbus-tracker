@@ -89,32 +89,11 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
             
             // Get predictions
-            NTMNextbus.getPredictionsForMultiStops(NTMNextbus.NTMDefaultAgency, routes: routes, directions: directions, stops: stops) { (response, error) -> Void in
-                
+            NTMNextbus.getPredictionsOfBookmarkedStops(){ (data, error) -> Void in
                 self.tblRefreshControl.endRefreshing();
                 if (error.code == 0) {
-                    let array = response as! [[NSDictionary]];
-                    
-                    // Prediction of stops
-                    for (var i = 0; i < array.count; i++) {
-                        var prediction = array[i];
-                        var minutes: String = "";
-                        
-                        // Predictions
-                        for (var j = 0; j < prediction.count; j++) {
-                            if let min = prediction[j]["_minutes"] as? String {
-                                if (j == 0 && j == prediction.count - 1) {
-                                    minutes = "In " + min + " minutes";
-                                } else if (j == 0) {
-                                    minutes = "In " + min + ", ";
-                                } else if (j == prediction.count - 1) {
-                                    minutes += min + " minutes";
-                                } else {
-                                    minutes += min + ", ";
-                                }
-                            }
-                        }
-                        self.preditions[i][NTMNextbus.NTMKeyMinutes] = minutes;
+                    if let _data = data as? [Dictionary<String, String>] {
+                        self.preditions = _data;
                     }
                 } else {
                     for (var i = 0; i < array.count; i++) {
@@ -143,12 +122,12 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         cell.lblStop.text = preditions[indexPath.row][NTMNextbus.NTMKeyStopTitle];
         cell.lblRoute.text = preditions[indexPath.row][NTMNextbus.NTMKeyRouteTitle];
-        
-        var _p_str: String = preditions[indexPath.row][NTMNextbus.NTMKeyMinutes]!;
-        if (_p_str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0) {
-            cell.lblPredictions.text = "No predictions available.";
-        } else {
-            cell.lblPredictions.text = _p_str;
+        cell.lblPredictions.text = "No predictions available.";
+        if (preditions[indexPath.row].indexForKey(NTMNextbus.NTMKeyMinutes) != nil) {
+            let _p_str: String = preditions[indexPath.row][NTMNextbus.NTMKeyMinutes]!;
+            if (_p_str.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) != 0) {
+                cell.lblPredictions.text = _p_str;
+            }
         }
         
         return cell;

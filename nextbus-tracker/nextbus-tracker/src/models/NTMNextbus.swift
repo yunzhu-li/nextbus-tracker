@@ -150,6 +150,58 @@ class NTMNextbus {
         }
     }
     
+    /* Get prediction data od bookmarked stops */
+    static func getPredictionsOfBookmarkedStops(dataHandler: (AnyObject?, NSError!) -> Void) {
+        if var predictions = FLLocalStorageUtils.readObjectFromUserDefaults(NTMNextbus.NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
+            
+            if (predictions.count == 0) {
+                dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
+                return;
+            }
+            
+            var routes: [String] = [], directions: [String] = [], stops: [String] = [];
+            for (var i = 0; i < predictions.count; i++) {
+                // Parameters for request
+                routes.append(predictions[i][NTMNextbus.NTMKeyRoute] as String!);
+                directions.append(predictions[i][NTMNextbus.NTMKeyDirection] as String!);
+                stops.append(predictions[i][NTMNextbus.NTMKeyStop] as String!);
+            }
+            
+            // Get predictions
+            NTMNextbus.getPredictionsForMultiStops(NTMNextbus.NTMDefaultAgency, routes: routes, directions: directions, stops: stops) { (response, error) -> Void in
+                
+                if (error.code == 0) {
+                    let responseArray = response as! [[NSDictionary]];
+                    
+                    // Prediction of stops
+                    for (var i = 0; i < responseArray.count; i++) {
+                        var prediction = responseArray[i];
+                        var minutes: String = "";
+                        
+                        // Predictions
+                        for (var j = 0; j < prediction.count; j++) {
+                            if let min = prediction[j]["_minutes"] as? String {
+                                if (j == 0 && j == prediction.count - 1) {
+                                    minutes = "In " + min + " minutes";
+                                } else if (j == 0) {
+                                    minutes = "In " + min + ", ";
+                                } else if (j == prediction.count - 1) {
+                                    minutes += min + " minutes";
+                                } else {
+                                    minutes += min + ", ";
+                                }
+                            }
+                        }
+                        predictions[i][NTMNextbus.NTMKeyMinutes] = minutes;
+                    }
+                    dataHandler(predictions, NSError(domain: "", code: 0, userInfo: nil));
+                    return;
+                }
+                dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
+            }
+        }
+    }
+    
     /* Add a stop to bookmarks and write to local storage */
     static func addStopToLocalStorage(agency: String, route: String, routeTitle: String, direction: String, directionTitle: String, stop: String, stopTitle: String) -> Void {
         
