@@ -96,7 +96,7 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         self.preditions = _data;
                     }
                 } else {
-                    for (var i = 0; i < array.count; i++) {
+                    for (var i = 0; i < self.preditions.count; i++) {
                         self.preditions[i][NTMNextbus.NTMKeyMinutes] = "";
                     }
                 }
