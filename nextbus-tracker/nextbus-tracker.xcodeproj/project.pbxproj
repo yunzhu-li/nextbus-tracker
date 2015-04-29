@@ -10,23 +10,32 @@
 		791D86B41AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */; };
 		791D86B61AEEEFCC00BCF9AA /* FLHTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */; };
 		791D86B81AEF03C300BCF9AA /* NTMNextbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */; };
-		791D86BD1AEF27CE00BCF9AA /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 791D86BC1AEF27CE00BCF9AA /* XMLDictionary.m */; };
 		791D86C21AEF4E9600BCF9AA /* NTTblCellBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86C11AEF4E9600BCF9AA /* NTTblCellBookmarks.swift */; };
+		792434441AF084B300B3E256 /* NTTblCellRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434421AF084B300B3E256 /* NTTblCellRoutes.swift */; };
+		792434451AF084B300B3E256 /* NTVCRouteSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434431AF084B300B3E256 /* NTVCRouteSelector.swift */; };
+		792434481AF0856000B3E256 /* NTVCStopSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434471AF0856000B3E256 /* NTVCStopSelector.swift */; };
+		7924344A1AF0856E00B3E256 /* NTTblCellStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434491AF0856E00B3E256 /* NTTblCellStops.swift */; };
+		7924344D1AF08D4000B3E256 /* NTVCAbout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7924344C1AF08D4000B3E256 /* NTVCAbout.swift */; };
 		7941BCA51AEED37000DB88D7 /* NTVCBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */; };
 		797393D41AE99DA900CB1D32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797393C91AE99DA900CB1D32 /* Images.xcassets */; };
 		797393D51AE99DA900CB1D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797393CB1AE99DA900CB1D32 /* Main.storyboard */; };
 		797393D61AE99DA900CB1D32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797393CE1AE99DA900CB1D32 /* AppDelegate.swift */; };
 		797393DA1AE99DDB00CB1D32 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 797393D91AE99DDB00CB1D32 /* Launch Screen.xib */; };
+		797D6EFF1AF0671C00596DCD /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D6EFE1AF0671C00596DCD /* XMLDictionary.m */; };
+		797D6F011AF0673100596DCD /* NTGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797D6F001AF0673100596DCD /* NTGlobal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLLocalStorageUtils.swift; sourceTree = "<group>"; };
 		791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLHTTPUtils.swift; sourceTree = "<group>"; };
 		791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMNextbus.swift; sourceTree = "<group>"; };
-		791D86BB1AEF27CE00BCF9AA /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = XMLDictionary/XMLDictionary.h; sourceTree = "<group>"; };
-		791D86BC1AEF27CE00BCF9AA /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLDictionary.m; path = XMLDictionary/XMLDictionary.m; sourceTree = "<group>"; };
 		791D86C01AEF3E1800BCF9AA /* nextbus-tracker-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "nextbus-tracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		791D86C11AEF4E9600BCF9AA /* NTTblCellBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTblCellBookmarks.swift; sourceTree = "<group>"; };
+		792434421AF084B300B3E256 /* NTTblCellRoutes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTblCellRoutes.swift; sourceTree = "<group>"; };
+		792434431AF084B300B3E256 /* NTVCRouteSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCRouteSelector.swift; sourceTree = "<group>"; };
+		792434471AF0856000B3E256 /* NTVCStopSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCStopSelector.swift; sourceTree = "<group>"; };
+		792434491AF0856E00B3E256 /* NTTblCellStops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTblCellStops.swift; sourceTree = "<group>"; };
+		7924344C1AF08D4000B3E256 /* NTVCAbout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCAbout.swift; sourceTree = "<group>"; };
 		7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCBookmarks.swift; sourceTree = "<group>"; };
 		797393A11AE99C7200CB1D32 /* nextbus-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nextbus-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		797393C91AE99DA900CB1D32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -34,6 +43,9 @@
 		797393CE1AE99DA900CB1D32 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		797393D31AE99DA900CB1D32 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		797393D91AE99DDB00CB1D32 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		797D6EFD1AF0671C00596DCD /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		797D6EFE1AF0671C00596DCD /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
+		797D6F001AF0673100596DCD /* NTGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTGlobal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,13 +75,30 @@
 			path = network;
 			sourceTree = "<group>";
 		};
-		791D86B91AEF27A000BCF9AA /* thirdparty */ = {
+		792434411AF084B300B3E256 /* routeselector */ = {
 			isa = PBXGroup;
 			children = (
-				791D86BB1AEF27CE00BCF9AA /* XMLDictionary.h */,
-				791D86BC1AEF27CE00BCF9AA /* XMLDictionary.m */,
+				792434421AF084B300B3E256 /* NTTblCellRoutes.swift */,
+				792434431AF084B300B3E256 /* NTVCRouteSelector.swift */,
 			);
-			path = thirdparty;
+			path = routeselector;
+			sourceTree = "<group>";
+		};
+		792434461AF0850200B3E256 /* stopselector */ = {
+			isa = PBXGroup;
+			children = (
+				792434471AF0856000B3E256 /* NTVCStopSelector.swift */,
+				792434491AF0856E00B3E256 /* NTTblCellStops.swift */,
+			);
+			path = stopselector;
+			sourceTree = "<group>";
+		};
+		7924344B1AF08D3600B3E256 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				7924344C1AF08D4000B3E256 /* NTVCAbout.swift */,
+			);
+			path = about;
 			sourceTree = "<group>";
 		};
 		7941BCA31AEED37000DB88D7 /* bookmarks */ = {
@@ -128,7 +157,7 @@
 		797393CC1AE99DA900CB1D32 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				791D86B91AEF27A000BCF9AA /* thirdparty */,
+				797D6EFA1AF0671C00596DCD /* utilities */,
 				797393CF1AE99DA900CB1D32 /* models */,
 				797393D01AE99DA900CB1D32 /* viewcontrollers */,
 				797393CD1AE99DA900CB1D32 /* main */,
@@ -159,6 +188,9 @@
 			isa = PBXGroup;
 			children = (
 				7941BCA31AEED37000DB88D7 /* bookmarks */,
+				792434411AF084B300B3E256 /* routeselector */,
+				792434461AF0850200B3E256 /* stopselector */,
+				7924344B1AF08D3600B3E256 /* about */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";
@@ -169,6 +201,32 @@
 				797393D31AE99DA900CB1D32 /* Info.plist */,
 			);
 			path = supporting;
+			sourceTree = "<group>";
+		};
+		797D6EFA1AF0671C00596DCD /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				797D6EFB1AF0671C00596DCD /* thirdparty */,
+				797D6F001AF0673100596DCD /* NTGlobal.swift */,
+			);
+			path = utilities;
+			sourceTree = "<group>";
+		};
+		797D6EFB1AF0671C00596DCD /* thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				797D6EFC1AF0671C00596DCD /* XMLDictionary */,
+			);
+			path = thirdparty;
+			sourceTree = "<group>";
+		};
+		797D6EFC1AF0671C00596DCD /* XMLDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				797D6EFD1AF0671C00596DCD /* XMLDictionary.h */,
+				797D6EFE1AF0671C00596DCD /* XMLDictionary.m */,
+			);
+			path = XMLDictionary;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,13 +300,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				792434441AF084B300B3E256 /* NTTblCellRoutes.swift in Sources */,
 				7941BCA51AEED37000DB88D7 /* NTVCBookmarks.swift in Sources */,
+				792434481AF0856000B3E256 /* NTVCStopSelector.swift in Sources */,
 				791D86C21AEF4E9600BCF9AA /* NTTblCellBookmarks.swift in Sources */,
 				791D86B41AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift in Sources */,
+				797D6F011AF0673100596DCD /* NTGlobal.swift in Sources */,
 				797393D61AE99DA900CB1D32 /* AppDelegate.swift in Sources */,
 				791D86B61AEEEFCC00BCF9AA /* FLHTTPUtils.swift in Sources */,
+				7924344A1AF0856E00B3E256 /* NTTblCellStops.swift in Sources */,
+				792434451AF084B300B3E256 /* NTVCRouteSelector.swift in Sources */,
 				791D86B81AEF03C300BCF9AA /* NTMNextbus.swift in Sources */,
-				791D86BD1AEF27CE00BCF9AA /* XMLDictionary.m in Sources */,
+				7924344D1AF08D4000B3E256 /* NTVCAbout.swift in Sources */,
+				797D6EFF1AF0671C00596DCD /* XMLDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
