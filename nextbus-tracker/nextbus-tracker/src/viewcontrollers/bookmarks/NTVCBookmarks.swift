@@ -30,6 +30,7 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // Data
     var preditions: [Dictionary<String, String>] = [];
     var initialReload = true;
+    var tmAutoRefresh: NSTimer = NSTimer();
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -53,6 +54,12 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
         super.viewWillAppear(animated);
         initialReload = true;
         refreshData();
+        tmAutoRefresh = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refreshData", userInfo: nil, repeats: true);
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated);
+        tmAutoRefresh.invalidate();
     }
     
     @IBAction func btnAddAct(sender: UIBarButtonItem) {
