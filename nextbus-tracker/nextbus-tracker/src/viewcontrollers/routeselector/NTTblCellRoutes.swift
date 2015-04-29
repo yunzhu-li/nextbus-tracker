@@ -1,6 +1,3 @@
-//
-//  This file is part of Nextbus Tracker.
-//
 //  Created by Yunzhu Li on 04/28/15.
 //  Copyright (c) 2015 Yunzhu Li.
 //
@@ -23,8 +20,7 @@
 import Foundation
 import UIKit
 
-class NTTblCellBookmarks: UITableViewCell {
-    @IBOutlet weak var lblStop: UILabel!
+class NTTblCellRoutes: UITableViewCell {
     @IBOutlet weak var lblRoute: UILabel!
-    @IBOutlet weak var lblPredictions: UILabel!
+    @IBOutlet weak var lblRouteInfo: UILabel!
 }

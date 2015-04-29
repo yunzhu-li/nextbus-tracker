@@ -24,17 +24,21 @@ import Foundation
 import UIKit
 
 class NTMNextbus {
-    static private var basicURL = "http://webservices.nextbus.com/service/publicXMLFeed";
-    static let NTMDefaultAgency = "rutgers-newark";
-    static let NTMKeyCommand    = "command";
-    static let NTMKeyTitle      = "title";
-    static let NTMKeyRouteTitle = "routeTitle";
-    static let NTMKeyStopTitle  = "stopTitle";
-    static let NTMKeyAgency     = "a";
-    static let NTMKeyRoute      = "r";
-    static let NTMKeyDirection  = "d";
-    static let NTMKeyStop       = "s";
-    static let NTMKeyMinutes    = "_minutes";
+    static private var basicURL            = "http://webservices.nextbus.com/service/publicXMLFeed";
+    static let NTMBookmarksLocalStorageKey = "NTMBookmarks";
+    
+    static let NTMDefaultAgency       = "rutgers-newark";
+    static let NTMDefaultAgencyTitle  = "Rutgers Univ. Newark College Town Shuttle";
+    static let NTMKeyCommand          = "command";
+    static let NTMKeyTitle            = "_title";
+    static let NTMKeyTag              = "_tag";
+    static let NTMKeyRouteTitle       = "routeTitle";
+    static let NTMKeyStopTitle        = "stopTitle";
+    static let NTMKeyAgency           = "a";
+    static let NTMKeyRoute            = "r";
+    static let NTMKeyDirection        = "d";
+    static let NTMKeyStop             = "s";
+    static let NTMKeyMinutes          = "_minutes";
     
     /* Get route configuration */
     static func getRouteConfig(agency: String, dataHandler: (AnyObject?, NSError!) -> Void) -> Void {
@@ -51,6 +55,7 @@ class NTMNextbus {
             var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
             if (dict != nil) {
                 dataHandler(dict, NSError(domain: "", code: 0, userInfo: nil));
+                return;
             }
             dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
         }
@@ -118,6 +123,8 @@ class NTMNextbus {
                         }
                         result.append(_p);
                     }
+                    dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
+                    return;
                 }
                 
                 // Only one stop
@@ -134,13 +141,34 @@ class NTMNextbus {
                         if let prediction = direction["prediction"] as? NSDictionary {
                             _p.append(prediction);
                         }
+                        dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
+                        return;
                     }
                 }
-                dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
-                return;
             }
             dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
         }
+    }
+    
+    /* Add a stop to bookmarks and write to local storage */
+    static func addStopToLocalStorage(agency: String, route: String, routeTitle: String, direction: String, directionTitle: String, stop: String, stopTitle: String) -> Void {
+        
+        var dict: Dictionary<String, String> = Dictionary<String, String>();
+        dict[NTMNextbus.NTMKeyAgency] = agency;
+        dict[NTMNextbus.NTMKeyRoute] = route;
+        dict[NTMNextbus.NTMKeyRouteTitle] = routeTitle;
+        dict[NTMNextbus.NTMKeyDirection] = direction;
+        dict[NTMNextbus.NTMKeyStop] = stop;
+        dict[NTMNextbus.NTMKeyStopTitle] = stopTitle;
+        
+        var array: [Dictionary<String, String>] = [];
+        if var _array = FLLocalStorageUtils.readObjectFromUserDefaults(NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
+            _array.append(dict);
+            array = _array;
+        } else {
+            array.append(dict);
+        }
+        FLLocalStorageUtils.writeObjectToUserDefaults(NTMBookmarksLocalStorageKey, object: array);
     }
     
     static func writeDebugData() {
@@ -165,6 +193,6 @@ class NTMNextbus {
         
         a.append(d);
         
-        FLLocalStorageUtils.writeObjectToUserDefaults("NTVCBookmarks", object: a);
+        FLLocalStorageUtils.writeObjectToUserDefaults(NTMBookmarksLocalStorageKey, object: a);
     }
 }

@@ -28,39 +28,46 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var tblRefreshControl: UIRefreshControl!
     
     // Data
-    let NTVCBookmarksLocalStorageKey = "NTVCBookmarks";
     var preditions: [Dictionary<String, String>] = [];
     var initialReload = true;
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        // Configure navigation bar appearance
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 0.57, blue: 1, alpha: 1);
-        //UIColor(red: 0, green: 0.5, blue: 1, alpha: 1);
-        self.navigationController?.navigationBar.translucent = true;
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor();
         self.navigationController?.navigationBar.titleTextAttributes = [ NSForegroundColorAttributeName : UIColor.whiteColor() ];
         
+        // Configure Refresh Control
         self.tblRefreshControl = UIRefreshControl();
         self.tblRefreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged);
         self.tblRefreshControl.tintColor = UIColor.whiteColor();
         self.tblBookmarks.addSubview(tblRefreshControl)
         
-        NTMNextbus.writeDebugData();
+        //NTMNextbus.writeDebugData();
+        refreshData();
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated);
+        initialReload = true;
         refreshData();
     }
     
     @IBAction func btnAddAct(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("PushToRouteSelector", sender: self);
     }
     
     func refreshData() {
         self.preditions = [];
-        if let array = FLLocalStorageUtils.readObjectFromUserDefaults(NTVCBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
+        if let array = FLLocalStorageUtils.readObjectFromUserDefaults(NTMNextbus.NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
             
             var routes: [String] = [], directions: [String] = [], stops: [String] = [];
             for (var i = 0; i < array.count; i++) {
                 
                 var prediction = array[i];
-                prediction[NTMNextbus.NTMKeyMinutes] = "No predictions available";
-                
+                prediction[NTMNextbus.NTMKeyMinutes] = "Getting prediction data...";
                 self.preditions.append(prediction);
                 
                 // Parameters for request
@@ -76,6 +83,8 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             // Get predictions
             NTMNextbus.getPredictionsForMultiStops(NTMNextbus.NTMDefaultAgency, routes: routes, directions: directions, stops: stops) { (response, error) -> Void in
+                
+                self.tblRefreshControl.endRefreshing();
                 if (error.code == 0) {
                     let array = response as! [[NSDictionary]];
                     
@@ -87,7 +96,9 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
                         // Predictions
                         for (var j = 0; j < prediction.count; j++) {
                             if let min = prediction[j]["_minutes"] as? String {
-                                if (j == 0) {
+                                if (j == 0 && j == prediction.count - 1) {
+                                    minutes = "In " + min + " minutes";
+                                } else if (j == 0) {
                                     minutes = "In " + min + ", ";
                                 } else if (j == prediction.count - 1) {
                                     minutes += min + " minutes";
@@ -97,11 +108,16 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
                             }
                         }
                         self.preditions[i][NTMNextbus.NTMKeyMinutes] = minutes;
-                        self.tblBookmarks.reloadData();
-                        self.tblRefreshControl.endRefreshing();
+                    }
+                } else {
+                    for (var i = 0; i < array.count; i++) {
+                        self.preditions[i][NTMNextbus.NTMKeyMinutes] = "";
                     }
                 }
+                self.tblBookmarks.reloadData();
             }
+        } else {
+            self.tblRefreshControl.endRefreshing();
         }
     }
     
@@ -132,7 +148,8 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if (indexPath.row == preditions.count) {
+            self.btnAddAct(UIBarButtonItem());
+        }
     }
 }
-

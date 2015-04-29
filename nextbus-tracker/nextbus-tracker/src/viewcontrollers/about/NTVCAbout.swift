@@ -23,8 +23,18 @@
 import Foundation
 import UIKit
 
-class NTTblCellBookmarks: UITableViewCell {
-    @IBOutlet weak var lblStop: UILabel!
-    @IBOutlet weak var lblRoute: UILabel!
-    @IBOutlet weak var lblPredictions: UILabel!
+class NTVCAbout: UIViewController {
+    
+    @IBAction func btnLinkAct(sender: UIButton) {
+        var url: String = "";
+        switch sender.tag {
+        case 1:
+            url = "https://github.com/yunzhu-li/nextbus-tracker";
+        case 2:
+            url = "https://yunzhu.li";
+        default:
+            url = "https://yunzhu.li";
+        }
+        UIApplication.sharedApplication().openURL(NSURL(string: url)!);
+    }
 }
