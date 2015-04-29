@@ -89,7 +89,7 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
             
             // Get predictions
-            NTMNextbus.getPredictionsOfBookmarkedStops(){ (data, error) -> Void in
+            NTMNextbus.getPredictionsOfBookmarkedStops(NTMNextbus.NTMPredictionFetchMode.Full) { (data, error) -> Void in
                 self.tblRefreshControl.endRefreshing();
                 if (error.code == 0) {
                     if let _data = data as? [Dictionary<String, String>] {

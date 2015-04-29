@@ -1,7 +1,7 @@
 //
 //  This file is part of Nextbus Tracker.
 //
-//  Created by Yunzhu Li on 04/28/15.
+//  Created by Yunzhu Li on 04/29/15.
 //  Copyright (c) 2015 Yunzhu Li.
 //
 //  Nextbus Tracker is free software: you can redistribute
@@ -26,20 +26,57 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
+    @IBOutlet weak var tblStops: WKInterfaceTable!
+    
+    var tmRefresh: NSTimer = NSTimer();
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
-        // Configure interface objects here.
     }
 
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        tmRefresh = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refreshData", userInfo: nil, repeats: true);
+        refreshData();
     }
 
     override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
+        tmRefresh.invalidate();
         super.didDeactivate()
     }
-
+    
+    func refreshData() {
+        let a = WKInterfaceController.openParentApplication(["command" : "predictions_short"], reply: { (dict, error) -> Void in
+            if (error == nil || error.code == 0) {
+                
+                if let predictions = dict["predictions"] as? [Dictionary<String, String>] {
+                    
+                    // No stops bookmarked
+                    if (predictions.count == 0) {
+                        self.tblStops.setNumberOfRows(1, withRowType: "tblRowStops");
+                        if let row = self.tblStops.rowControllerAtIndex(0) as? NTTblRowStops {
+                            row.lblStopTitle.setText("No saved stops");
+                            row.lblPredictions.setText("Please add on iOS App");
+                        }
+                        return;
+                    }
+                    
+                    self.tblStops.setNumberOfRows(predictions.count, withRowType: "tblRowStops");
+                    for (var i = 0; i < self.tblStops.numberOfRows; i++) {
+                        if let row = self.tblStops.rowControllerAtIndex(i) as? NTTblRowStops {
+                            row.lblStopTitle.setText(predictions[i]["stopTitle"]);
+                            
+                            if (predictions[i].indexForKey("_minutes") != nil) {
+                                let minutes: String = predictions[i]["_minutes"]!;
+                                row.lblPredictions.setText(minutes);
+                                if (minutes.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0) {
+                                    row.lblPredictions.setText("No predictions.");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
 }

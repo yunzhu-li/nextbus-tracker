@@ -1,7 +1,7 @@
 //
 //  This file is part of Nextbus Tracker.
 //
-//  Created by Yunzhu Li on 04/28/15.
+//  Created by Yunzhu Li on 04/29/15.
 //  Copyright (c) 2015 Yunzhu Li.
 //
 //  Nextbus Tracker is free software: you can redistribute
@@ -26,20 +26,48 @@ import Foundation
 
 class GlanceController: WKInterfaceController {
 
+    @IBOutlet weak var lblStopTitle: WKInterfaceLabel!
+    @IBOutlet weak var lblPredictions: WKInterfaceLabel!
+    
+    var tmRefresh: NSTimer = NSTimer();
+    
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        
-        // Configure interface objects here.
     }
-
+    
     override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        tmRefresh = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refreshData", userInfo: nil, repeats: true);
+        refreshData();
     }
-
+    
     override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
+        tmRefresh.invalidate();
         super.didDeactivate()
     }
-
+    
+    func refreshData() {
+        let a = WKInterfaceController.openParentApplication(["command" : "predictions_one"], reply: { (dict, error) -> Void in
+            if (error == nil || error.code == 0) {
+                
+                if let predictions = dict["predictions"] as? [Dictionary<String, String>] {
+                    if (predictions.count > 0) {
+                        self.lblStopTitle.setText(predictions[0]["stopTitle"]);
+                        if (predictions[0].indexForKey("_minutes") != nil) {
+                            let minutes: String = predictions[0]["_minutes"]!;
+                            self.lblPredictions.setText(minutes);
+                            if (minutes.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0) {
+                                self.lblPredictions.setText("No predictions");
+                            }
+                        } else {
+                            self.lblPredictions.setText("No predictions");
+                        }
+                    } else {
+                        self.lblStopTitle.setText("No stops added");
+                        self.lblPredictions.setText("");
+                    }
+                }
+            }
+        });
+    }
 }

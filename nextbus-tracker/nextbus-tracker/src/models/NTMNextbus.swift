@@ -24,8 +24,14 @@ import Foundation
 import UIKit
 
 class NTMNextbus {
+    
     static private var basicURL            = "http://webservices.nextbus.com/service/publicXMLFeed";
     static let NTMBookmarksLocalStorageKey = "NTMBookmarks";
+    enum NTMPredictionFetchMode {
+        case Full
+        case Short
+        case One
+    }
     
     static let NTMDefaultAgency       = "rutgers-newark";
     static let NTMDefaultAgencyTitle  = "Rutgers Univ. Newark College Town Shuttle";
@@ -141,6 +147,7 @@ class NTMNextbus {
                         if let prediction = direction["prediction"] as? NSDictionary {
                             _p.append(prediction);
                         }
+                        result.append(_p);
                         dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
                         return;
                     }
@@ -151,7 +158,7 @@ class NTMNextbus {
     }
     
     /* Get prediction data od bookmarked stops */
-    static func getPredictionsOfBookmarkedStops(dataHandler: (AnyObject?, NSError!) -> Void) {
+    static func getPredictionsOfBookmarkedStops(mode: NTMPredictionFetchMode, dataHandler: (AnyObject?, NSError!) -> Void) {
         if var predictions = FLLocalStorageUtils.readObjectFromUserDefaults(NTMNextbus.NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
             
             if (predictions.count == 0) {
@@ -179,13 +186,22 @@ class NTMNextbus {
                         var minutes: String = "";
                         
                         // Predictions
-                        for (var j = 0; j < prediction.count; j++) {
+                        var count = prediction.count;
+                        if (mode == NTMPredictionFetchMode.Short) {
+                            count = 3;
+                        }
+                        for (var j = 0; j < count; j++) {
                             if let min = prediction[j]["_minutes"] as? String {
-                                if (j == 0 && j == prediction.count - 1) {
+                                if (mode == NTMPredictionFetchMode.One) {
+                                    minutes = min;
+                                    break;
+                                }
+                                
+                                if (j == 0 && j == count - 1) {
                                     minutes = "In " + min + " minutes";
                                 } else if (j == 0) {
                                     minutes = "In " + min + ", ";
-                                } else if (j == prediction.count - 1) {
+                                } else if (j == count - 1) {
                                     minutes += min + " minutes";
                                 } else {
                                     minutes += min + ", ";

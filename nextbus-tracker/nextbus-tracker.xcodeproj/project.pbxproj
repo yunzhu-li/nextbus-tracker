@@ -23,6 +23,7 @@
 		7924347D1AF0B82700B3E256 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434781AF0B82700B3E256 /* InterfaceController.swift */; };
 		792434851AF0B85700B3E256 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 792434801AF0B85700B3E256 /* Images.xcassets */; };
 		792434861AF0B85700B3E256 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 792434821AF0B85700B3E256 /* Interface.storyboard */; };
+		7924348A1AF1463B00B3E256 /* NTTblRowStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792434891AF1463B00B3E256 /* NTTblRowStops.swift */; };
 		7941BCA51AEED37000DB88D7 /* NTVCBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */; };
 		797393D41AE99DA900CB1D32 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797393C91AE99DA900CB1D32 /* Images.xcassets */; };
 		797393D51AE99DA900CB1D32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797393CB1AE99DA900CB1D32 /* Main.storyboard */; };
@@ -83,6 +84,7 @@
 		792434801AF0B85700B3E256 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		792434821AF0B85700B3E256 /* Interface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
 		792434881AF0B8D100B3E256 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		792434891AF1463B00B3E256 /* NTTblRowStops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTblRowStops.swift; sourceTree = "<group>"; };
 		7941BCA41AEED37000DB88D7 /* NTVCBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTVCBookmarks.swift; sourceTree = "<group>"; };
 		797393A11AE99C7200CB1D32 /* nextbus-tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nextbus-tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		797393C91AE99DA900CB1D32 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -185,8 +187,9 @@
 		792434761AF0B82700B3E256 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				792434771AF0B82700B3E256 /* GlanceController.swift */,
 				792434781AF0B82700B3E256 /* InterfaceController.swift */,
+				792434771AF0B82700B3E256 /* GlanceController.swift */,
+				792434891AF1463B00B3E256 /* NTTblRowStops.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7924348A1AF1463B00B3E256 /* NTTblRowStops.swift in Sources */,
 				7924347C1AF0B82700B3E256 /* GlanceController.swift in Sources */,
 				7924347D1AF0B82700B3E256 /* InterfaceController.swift in Sources */,
 			);
@@ -708,6 +712,7 @@
 				7924346F1AF0B78100B3E256 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		792434701AF0B78100B3E256 /* Build configuration list for PBXNativeTarget "Nextbus Tracker WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -716,6 +721,7 @@
 				792434721AF0B78100B3E256 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7973939C1AE99C7200CB1D32 /* Build configuration list for PBXProject "nextbus-tracker" */ = {
 			isa = XCConfigurationList;
