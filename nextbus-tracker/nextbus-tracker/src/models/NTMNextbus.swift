@@ -171,6 +171,14 @@ class NTMNextbus {
         FLLocalStorageUtils.writeObjectToUserDefaults(NTMBookmarksLocalStorageKey, object: array);
     }
     
+    /* Remove a stop from local storage */
+    static func removeStopFromLocalStorage(index: Int) {
+        if var _array = FLLocalStorageUtils.readObjectFromUserDefaults(NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
+            _array.removeAtIndex(index);
+            FLLocalStorageUtils.writeObjectToUserDefaults(NTMBookmarksLocalStorageKey, object: _array);
+        }
+    }
+    
     static func writeDebugData() {
         var d = Dictionary <String, AnyObject>();
         var a: [Dictionary<String, AnyObject>] = [];

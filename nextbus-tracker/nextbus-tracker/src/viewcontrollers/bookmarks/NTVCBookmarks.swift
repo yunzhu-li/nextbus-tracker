@@ -152,4 +152,17 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.btnAddAct(UIBarButtonItem());
         }
     }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if (indexPath.row < preditions.count) {
+            return true;
+        }
+        return false;
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        preditions.removeAtIndex(indexPath.row);
+        NTMNextbus.removeStopFromLocalStorage(indexPath.row);
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic);
+    }
 }
