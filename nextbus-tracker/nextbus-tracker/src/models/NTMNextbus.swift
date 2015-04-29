@@ -55,7 +55,7 @@ class NTMNextbus {
         
         // Begin request
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
-        FLHTTPUtils.sendAsynchronousRequest(basicURL, param_keys: param_keys, param_values: param_values, timeoutInterval: nil) { (urlResponse, data, error) -> Void in
+        FLHTTPUtils.sendAsynchronousRequest(basicURL, param_keys: param_keys, param_values: param_values, timeoutInterval: FLHTTPUtils.FLDefaultTimeoutInterval) { (urlResponse, data, error) -> Void in
             
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
             var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);

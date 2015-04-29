@@ -23,7 +23,7 @@
 import Foundation
 
 class FLHTTPUtils {
-    static private var FLDefaultTimeoutInterval: NSTimeInterval = 5;
+    static let FLDefaultTimeoutInterval: NSTimeInterval = 5;
     
     /* PercentEscape Encoder */
     static func encodeToPercentEscapeString(input: String) -> String? {
