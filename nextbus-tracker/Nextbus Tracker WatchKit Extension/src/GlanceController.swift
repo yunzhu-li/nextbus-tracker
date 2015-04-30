@@ -63,7 +63,7 @@ class GlanceController: WKInterfaceController {
                             self.lblPredictions.setText("No predictions");
                         }
                     } else {
-                        self.lblStopTitle.setText("Add stops on iPhone");
+                        self.lblStopTitle.setText("Configure Nextbus on iPhone");
                         self.lblPredictions.setText("");
                     }
                 }

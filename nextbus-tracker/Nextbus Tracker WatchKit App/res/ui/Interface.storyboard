@@ -15,10 +15,10 @@
                                 <tableRow identifier="tblRowStops" selectable="NO" id="66i-6B-kRk" customClass="NTTblRowStops" customModule="Nextbus_Tracker_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="45.5" alignment="left" animationDuration="1" layout="vertical" id="yxx-fu-2b9">
                                         <items>
-                                            <label width="131" height="18" alignment="left" text="Stop Title" minimumScaleFactor="0.30000000000000016" id="dWT-bw-dQ7">
+                                            <label width="131" height="18" alignment="left" minimumScaleFactor="0.30000000000000016" id="dWT-bw-dQ7">
                                                 <fontDescription key="font" type="system" weight="medium" pointSize="14"/>
                                             </label>
-                                            <label width="133" height="16" alignment="left" text="In x, y, z min" minimumScaleFactor="0.30000000000000016" id="nBZ-aM-Y9T">
+                                            <label width="133" height="16" alignment="left" minimumScaleFactor="0.30000000000000016" id="nBZ-aM-Y9T">
                                                 <fontDescription key="font" type="system" pointSize="12"/>
                                             </label>
                                         </items>
@@ -46,14 +46,14 @@
                     <items>
                         <group alignment="left" id="gv7-I2-MZq">
                             <items>
-                                <label width="136" height="42" alignment="left" text="Add stops on iPhone" textAlignment="left" minimumScaleFactor="0.10000000000000014" id="IaU-KP-LGb">
+                                <label width="136" height="42" alignment="left" textAlignment="left" minimumScaleFactor="0.10000000000000014" id="IaU-KP-LGb">
                                     <fontDescription key="font" type="system" pointSize="19"/>
                                 </label>
                             </items>
                         </group>
                         <group alignment="left" id="eew-Gs-W6Y">
                             <items>
-                                <label width="136" height="97" alignment="left" text="..." textAlignment="center" minimumScaleFactor="0.10000000000000001" id="a0J-vG-Vnd">
+                                <label width="136" height="97" alignment="left" textAlignment="center" minimumScaleFactor="0.10000000000000001" id="a0J-vG-Vnd">
                                     <fontDescription key="font" type="system" pointSize="64"/>
                                 </label>
                             </items>

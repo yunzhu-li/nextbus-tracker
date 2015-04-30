@@ -72,6 +72,8 @@ class InterfaceController: WKInterfaceController {
                                 if (minutes.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0) {
                                     row.lblPredictions.setText("No predictions.");
                                 }
+                            } else {
+                                row.lblPredictions.setText("No predictions.");
                             }
                         }
                     }

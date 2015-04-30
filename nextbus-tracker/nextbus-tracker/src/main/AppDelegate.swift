@@ -42,11 +42,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("Document Path: %@", documentsPath)
         #endif
         
-        return true
+        self.application(UIApplication.sharedApplication(), handleWatchKitExtensionRequest: ["command":"predictions_short"]) { (a) -> Void in
+            
+        }
+        
+        return true;
     }
     
     /* Handle requests from WitchKit extension */
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
+        
+        let btid = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
+            reply(["predictions" : [Dictionary<String, String>]()]);
+        }
         
         if let _userInfo = userInfo as? [String : String] {
             if (_userInfo.indexForKey("command") == nil) {
@@ -67,10 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if (error.code == 0) {
                     if let predictions = data as? [Dictionary<String, String>] {
                         reply(["predictions" : predictions]);
+                        UIApplication.sharedApplication().endBackgroundTask(btid);
                         return;
                     }
                 }
                 reply(["predictions" : [Dictionary<String, String>]()]);
+                UIApplication.sharedApplication().endBackgroundTask(btid);
             }
         }
     }

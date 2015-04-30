@@ -148,10 +148,10 @@ class NTMNextbus {
                             _p.append(prediction);
                         }
                         result.append(_p);
-                        dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
-                        return;
                     }
                 }
+                dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
+                return;
             }
             dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
         }
