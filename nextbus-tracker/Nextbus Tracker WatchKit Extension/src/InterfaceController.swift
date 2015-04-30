@@ -36,7 +36,7 @@ class InterfaceController: WKInterfaceController {
 
     override func willActivate() {
         super.willActivate()
-        tmRefresh = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refreshData", userInfo: nil, repeats: true);
+        tmRefresh = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "refreshData", userInfo: nil, repeats: true);
         refreshData();
     }
 
@@ -56,7 +56,7 @@ class InterfaceController: WKInterfaceController {
                         self.tblStops.setNumberOfRows(1, withRowType: "tblRowStops");
                         if let row = self.tblStops.rowControllerAtIndex(0) as? NTTblRowStops {
                             row.lblStopTitle.setText("No saved stops");
-                            row.lblPredictions.setText("Please add on iOS App");
+                            row.lblPredictions.setText("Please add stops on iPhone App.");
                         }
                         return;
                     }

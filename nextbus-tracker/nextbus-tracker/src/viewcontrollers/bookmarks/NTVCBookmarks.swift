@@ -22,7 +22,7 @@
 
 import UIKit
 
-class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewDataSource {
     // UI
     @IBOutlet weak var tblBookmarks: UITableView!
     var tblRefreshControl: UIRefreshControl!
@@ -34,6 +34,9 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        // GA
+        self.screenName = NSStringFromClass(self.dynamicType);
         
         // Configure navigation bar appearance
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 0.57, blue: 1, alpha: 1);
@@ -54,7 +57,7 @@ class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSourc
         super.viewWillAppear(animated);
         initialReload = true;
         refreshData();
-        tmAutoRefresh = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refreshData", userInfo: nil, repeats: true);
+        tmAutoRefresh = NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: "refreshData", userInfo: nil, repeats: true);
     }
     
     override func viewWillDisappear(animated: Bool) {

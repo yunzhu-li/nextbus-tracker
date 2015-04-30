@@ -188,7 +188,9 @@ class NTMNextbus {
                         // Predictions
                         var count = prediction.count;
                         if (mode == NTMPredictionFetchMode.Short) {
-                            count = 3;
+                            if (prediction.count > 3) {
+                                count = 3;
+                            }
                         }
                         for (var j = 0; j < count; j++) {
                             if let min = prediction[j]["_minutes"] as? String {

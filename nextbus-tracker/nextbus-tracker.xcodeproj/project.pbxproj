@@ -31,6 +31,12 @@
 		797393DA1AE99DDB00CB1D32 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 797393D91AE99DDB00CB1D32 /* Launch Screen.xib */; };
 		797D6EFF1AF0671C00596DCD /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 797D6EFE1AF0671C00596DCD /* XMLDictionary.m */; };
 		797D6F011AF0673100596DCD /* NTGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797D6F001AF0673100596DCD /* NTGlobal.swift */; };
+		79EFD8B81AF175FF00324A10 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 79EFD8B71AF175FF00324A10 /* iTunesArtwork */; };
+		79EFD8C51AF19E0900324A10 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EFD8C41AF19E0900324A10 /* libGoogleAnalyticsServices.a */; };
+		79EFD8C71AF19F0400324A10 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EFD8C61AF19F0400324A10 /* CoreData.framework */; };
+		79EFD8C91AF19F0C00324A10 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EFD8C81AF19F0C00324A10 /* SystemConfiguration.framework */; };
+		79EFD8CB1AF19F1400324A10 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EFD8CA1AF19F1400324A10 /* libz.dylib */; };
+		79EFD8CD1AF19F1B00324A10 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 79EFD8CC1AF19F1B00324A10 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +101,22 @@
 		797D6EFD1AF0671C00596DCD /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		797D6EFE1AF0671C00596DCD /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		797D6F001AF0673100596DCD /* NTGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTGlobal.swift; sourceTree = "<group>"; };
+		79EFD8B71AF175FF00324A10 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		79EFD8BA1AF19E0900324A10 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		79EFD8BB1AF19E0900324A10 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		79EFD8BC1AF19E0900324A10 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		79EFD8BD1AF19E0900324A10 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		79EFD8BE1AF19E0900324A10 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		79EFD8BF1AF19E0900324A10 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		79EFD8C01AF19E0900324A10 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		79EFD8C11AF19E0900324A10 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		79EFD8C21AF19E0900324A10 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		79EFD8C31AF19E0900324A10 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		79EFD8C41AF19E0900324A10 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		79EFD8C61AF19F0400324A10 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		79EFD8C81AF19F0C00324A10 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		79EFD8CA1AF19F1400324A10 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		79EFD8CC1AF19F1B00324A10 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +131,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79EFD8CD1AF19F1B00324A10 /* libsqlite3.dylib in Frameworks */,
+				79EFD8CB1AF19F1400324A10 /* libz.dylib in Frameworks */,
+				79EFD8C91AF19F0C00324A10 /* SystemConfiguration.framework in Frameworks */,
+				79EFD8C71AF19F0400324A10 /* CoreData.framework in Frameworks */,
+				79EFD8C51AF19E0900324A10 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +161,8 @@
 		792434411AF084B300B3E256 /* routeselector */ = {
 			isa = PBXGroup;
 			children = (
-				792434421AF084B300B3E256 /* NTTblCellRoutes.swift */,
 				792434431AF084B300B3E256 /* NTVCRouteSelector.swift */,
+				792434421AF084B300B3E256 /* NTTblCellRoutes.swift */,
 			);
 			path = routeselector;
 			sourceTree = "<group>";
@@ -270,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				797393C91AE99DA900CB1D32 /* Images.xcassets */,
+				79EFD8B71AF175FF00324A10 /* iTunesArtwork */,
 				797393CA1AE99DA900CB1D32 /* ui */,
 			);
 			path = res;
@@ -329,6 +357,10 @@
 			isa = PBXGroup;
 			children = (
 				797393D31AE99DA900CB1D32 /* Info.plist */,
+				79EFD8CC1AF19F1B00324A10 /* libsqlite3.dylib */,
+				79EFD8CA1AF19F1400324A10 /* libz.dylib */,
+				79EFD8C81AF19F0C00324A10 /* SystemConfiguration.framework */,
+				79EFD8C61AF19F0400324A10 /* CoreData.framework */,
 			);
 			path = supporting;
 			sourceTree = "<group>";
@@ -345,6 +377,7 @@
 		797D6EFB1AF0671C00596DCD /* thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				79EFD8B91AF19E0900324A10 /* GoogleAnalytics */,
 				797D6EFC1AF0671C00596DCD /* XMLDictionary */,
 			);
 			path = thirdparty;
@@ -357,6 +390,24 @@
 				797D6EFE1AF0671C00596DCD /* XMLDictionary.m */,
 			);
 			path = XMLDictionary;
+			sourceTree = "<group>";
+		};
+		79EFD8B91AF19E0900324A10 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				79EFD8BA1AF19E0900324A10 /* GAI.h */,
+				79EFD8BB1AF19E0900324A10 /* GAIDictionaryBuilder.h */,
+				79EFD8BC1AF19E0900324A10 /* GAIEcommerceFields.h */,
+				79EFD8BD1AF19E0900324A10 /* GAIEcommerceProduct.h */,
+				79EFD8BE1AF19E0900324A10 /* GAIEcommerceProductAction.h */,
+				79EFD8BF1AF19E0900324A10 /* GAIEcommercePromotion.h */,
+				79EFD8C01AF19E0900324A10 /* GAIFields.h */,
+				79EFD8C11AF19E0900324A10 /* GAILogger.h */,
+				79EFD8C21AF19E0900324A10 /* GAITrackedViewController.h */,
+				79EFD8C31AF19E0900324A10 /* GAITracker.h */,
+				79EFD8C41AF19E0900324A10 /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,6 +533,7 @@
 				797393D41AE99DA900CB1D32 /* Images.xcassets in Resources */,
 				797393DA1AE99DDB00CB1D32 /* Launch Screen.xib in Resources */,
 				797393D51AE99DA900CB1D32 /* Main.storyboard in Resources */,
+				79EFD8B81AF175FF00324A10 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +735,10 @@
 				INFOPLIST_FILE = "nextbus-tracker/supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/nextbus-tracker/src/utilities/thirdparty/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "nextbus-tracker/src/main/nextbus-tracker-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -697,6 +753,10 @@
 				INFOPLIST_FILE = "nextbus-tracker/supporting/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/nextbus-tracker/src/utilities/thirdparty/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "nextbus-tracker/src/main/nextbus-tracker-Bridging-Header.h";
 			};

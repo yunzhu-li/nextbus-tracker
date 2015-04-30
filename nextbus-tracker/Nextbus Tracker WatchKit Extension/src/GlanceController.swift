@@ -37,7 +37,7 @@ class GlanceController: WKInterfaceController {
     
     override func willActivate() {
         super.willActivate()
-        tmRefresh = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "refreshData", userInfo: nil, repeats: true);
+        tmRefresh = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "refreshData", userInfo: nil, repeats: true);
         refreshData();
     }
     
@@ -63,7 +63,7 @@ class GlanceController: WKInterfaceController {
                             self.lblPredictions.setText("No predictions");
                         }
                     } else {
-                        self.lblStopTitle.setText("No stops added");
+                        self.lblStopTitle.setText("Add stops on iPhone");
                         self.lblPredictions.setText("");
                     }
                 }
