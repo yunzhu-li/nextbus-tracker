@@ -233,6 +233,15 @@ class NTMNextbus {
         
         var array: [Dictionary<String, String>] = [];
         if var _array = FLLocalStorageUtils.readObjectFromUserDefaults(NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
+            
+            // Check duplicate
+            for _item in _array {
+                if (_item[NTMNextbus.NTMKeyRoute] == route && _item[NTMNextbus.NTMKeyStop] == stop) {
+                    return;
+                }
+            }
+            
+            // No duplicate
             _array.append(dict);
             array = _array;
         } else {
