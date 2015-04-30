@@ -25,3 +25,4 @@
 //
 
 #import "XMLDictionary.h"
+#import "GAI.h"

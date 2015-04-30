@@ -23,7 +23,13 @@
 import Foundation
 import UIKit
 
-class NTVCAbout: UIViewController {
+class NTVCAbout: GAITrackedViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        // GA
+        self.screenName = NSStringFromClass(self.dynamicType);
+    }
     
     @IBAction func btnLinkAct(sender: UIButton) {
         var url: String = "";

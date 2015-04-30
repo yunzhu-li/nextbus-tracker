@@ -23,7 +23,7 @@
 import Foundation
 import UIKit
 
-class NTVCStopSelector: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NTVCStopSelector: GAITrackedViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tblStops: UITableView!
     
@@ -31,6 +31,11 @@ class NTVCStopSelector: UIViewController, UITableViewDelegate, UITableViewDataSo
     var routeTag: String = "";
     var routeTitle: String = "";
     
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        // GA
+        self.screenName = NSStringFromClass(self.dynamicType);
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stops.count;

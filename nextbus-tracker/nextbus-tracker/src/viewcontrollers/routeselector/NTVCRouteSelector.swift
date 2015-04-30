@@ -23,7 +23,7 @@
 import Foundation
 import UIKit
 
-class NTVCRouteSelector: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tblRoutes: UITableView!
     @IBOutlet weak var lblStatus: UILabel!
@@ -35,6 +35,9 @@ class NTVCRouteSelector: UIViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        // GA
+        self.screenName = NSStringFromClass(self.dynamicType);
         
         self.tblRoutes.hidden = true;
         

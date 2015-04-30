@@ -28,7 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?;
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // GA
+        GAI.sharedInstance().trackUncaughtExceptions = true;
+        GAI.sharedInstance().dispatchInterval = 12;
+        GAI.sharedInstance().trackerWithTrackingId("UA-61812304-3");
+        
+        // Status bar
         UIApplication.sharedApplication().statusBarStyle = .LightContent;
         
         #if arch(i386) || arch(x86_64)
