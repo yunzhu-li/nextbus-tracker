@@ -55,11 +55,26 @@ class NTVCStopSelector: GAITrackedViewController, UITableViewDelegate, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tblStops.deselectRowAtIndexPath(indexPath, animated: true);
         
+        // Pop view controller after operations
+        var pop = true;
+        
         if let stopTag = stops[indexPath.row][NTMNextbus.NTMKeyTag] as? String {
             if let stopTitle = stops[indexPath.row][NTMNextbus.NTMKeyTitle] as? String {
-                NTMNextbus.addStopToLocalStorage(NTMNextbus.NTMDefaultAgency, route: routeTag, routeTitle: routeTitle, direction: "loop", directionTitle: "Loop", stop: stopTag, stopTitle: stopTitle);
+                let b = NTMNextbus.addStopToLocalStorage(NTMNextbus.NTMDefaultAgency, route: routeTag, routeTitle: routeTitle, direction: "loop", directionTitle: "Loop", stop: stopTag, stopTitle: stopTitle);
+                
+                if (!b) {
+                    // Pop alert
+                    var alert = UIAlertController(title: "Can't save stop", message: "Stop already saved.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    
+                    // Don't pop view controller
+                    pop = false;
+                }
             }
         }
-        self.navigationController?.popToRootViewControllerAnimated(true);
+        if (pop) {
+            self.navigationController?.popToRootViewControllerAnimated(true);
+        }
     }
 }

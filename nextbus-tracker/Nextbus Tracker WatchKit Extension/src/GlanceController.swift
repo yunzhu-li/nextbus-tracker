@@ -31,12 +31,9 @@ class GlanceController: WKInterfaceController {
     
     var tmRefresh: NSTimer = NSTimer();
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
-    }
-    
     override func willActivate() {
         super.willActivate()
+        tmRefresh.invalidate();
         tmRefresh = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "refreshData", userInfo: nil, repeats: true);
         refreshData();
     }
@@ -47,6 +44,7 @@ class GlanceController: WKInterfaceController {
     }
     
     func refreshData() {
+        self.lblPredictions.setText("Refreshing...");
         let a = WKInterfaceController.openParentApplication(["command" : "predictions_one"], reply: { (dict, error) -> Void in
             if (error == nil || error.code == 0) {
                 

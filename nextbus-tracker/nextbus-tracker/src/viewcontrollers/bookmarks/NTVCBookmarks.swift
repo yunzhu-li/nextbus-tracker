@@ -50,13 +50,13 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
         self.tblBookmarks.addSubview(tblRefreshControl)
         
         //NTMNextbus.writeDebugData();
-        refreshData();
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
         initialReload = true;
         refreshData();
+        tmAutoRefresh.invalidate();
         tmAutoRefresh = NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: "refreshData", userInfo: nil, repeats: true);
     }
     
@@ -77,7 +77,7 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
             for (var i = 0; i < array.count; i++) {
                 
                 var prediction = array[i];
-                prediction[NTMNextbus.NTMKeyMinutes] = "Getting prediction data...";
+                prediction[NTMNextbus.NTMKeyMinutes] = "Refreshing...";
                 self.preditions.append(prediction);
                 
                 // Parameters for request
@@ -93,17 +93,12 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
             
             // Get predictions
             NTMNextbus.getPredictionsOfBookmarkedStops(NTMNextbus.NTMPredictionFetchMode.Full) { (data, error) -> Void in
-                self.tblRefreshControl.endRefreshing();
-                if (error.code == 0) {
-                    if let _data = data as? [Dictionary<String, String>] {
-                        self.preditions = _data;
-                    }
-                } else {
-                    for (var i = 0; i < self.preditions.count; i++) {
-                        self.preditions[i][NTMNextbus.NTMKeyMinutes] = "";
-                    }
+                
+                if let _data = data as? [Dictionary<String, String>] {
+                    self.preditions = _data;
                 }
                 self.tblBookmarks.reloadData();
+                self.tblRefreshControl.endRefreshing();
             }
         } else {
             self.tblRefreshControl.endRefreshing();

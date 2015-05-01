@@ -30,27 +30,29 @@ class InterfaceController: WKInterfaceController {
     
     var tmRefresh: NSTimer = NSTimer();
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
-    }
-
     override func willActivate() {
-        super.willActivate()
+        super.willActivate();
+        tmRefresh.invalidate();
         tmRefresh = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "refreshData", userInfo: nil, repeats: true);
         refreshData();
     }
 
     override func didDeactivate() {
         tmRefresh.invalidate();
-        super.didDeactivate()
+        super.didDeactivate();
     }
     
     func refreshData() {
+        for (var i = 0; i < self.tblStops.numberOfRows; i++) {
+            if let row = self.tblStops.rowControllerAtIndex(i) as? NTTblRowStops {
+                row.lblPredictions.setText("Refreshing...");
+            }
+        }
+        
         let a = WKInterfaceController.openParentApplication(["command" : "predictions_short"], reply: { (dict, error) -> Void in
             if (error == nil || error.code == 0) {
                 
                 if let predictions = dict["predictions"] as? [Dictionary<String, String>] {
-                    
                     // No stops bookmarked
                     if (predictions.count == 0) {
                         self.tblStops.setNumberOfRows(1, withRowType: "tblRowStops");
@@ -61,6 +63,7 @@ class InterfaceController: WKInterfaceController {
                         return;
                     }
                     
+                    // Configure table
                     self.tblStops.setNumberOfRows(predictions.count, withRowType: "tblRowStops");
                     for (var i = 0; i < self.tblStops.numberOfRows; i++) {
                         if let row = self.tblStops.rowControllerAtIndex(i) as? NTTblRowStops {

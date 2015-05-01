@@ -27,10 +27,12 @@ class NTMNextbus {
     
     static private var basicURL            = "http://webservices.nextbus.com/service/publicXMLFeed";
     static let NTMBookmarksLocalStorageKey = "NTMBookmarks";
+    
+    // Fetch mode for getPredictionsOfBookmarkedStops
     enum NTMPredictionFetchMode {
-        case Full
-        case Short
-        case One
+        case Full       // Return full prediction data
+        case Short      // Return at most 3 predictions
+        case One        // Return at most 1 prediction
     }
     
     static let NTMDefaultAgency       = "rutgers-newark";
@@ -53,11 +55,16 @@ class NTMNextbus {
         param_keys.append(NTMKeyCommand); param_values.append("routeConfig");
         param_keys.append(NTMKeyAgency);  param_values.append(agency);
         
-        // Begin request
+        // Show network activity indicator
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
+        
+        // Begin request
         FLHTTPUtils.sendAsynchronousRequest(basicURL, param_keys: param_keys, param_values: param_values, timeoutInterval: FLHTTPUtils.FLDefaultTimeoutInterval) { (urlResponse, data, error) -> Void in
             
+            // Hide network activity indicator
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
+            
+            // Parse data
             var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
             if (dict != nil) {
                 dataHandler(dict, NSError(domain: "", code: 0, userInfo: nil));
@@ -90,30 +97,37 @@ class NTMNextbus {
         
         assert(routes.count == stops.count && routes.count == directions.count, "The number of routes and directions and stops must be equal.");
         
+        // Generate request parameters
         var param_keys: [String] = [], param_values: [String] = [];
         param_keys.append(NTMKeyCommand); param_values.append("predictionsForMultiStops");
         param_keys.append(NTMKeyAgency);  param_values.append(agency);
         
-        // Generate request parameters
         for (var i = 0; i < routes.count; i++) {
             param_keys.append("stops");
             param_values.append(routes[i] + "|" + directions[i] + "|" + stops[i]);
         }
         
-        // Begin request
+        // Show network activity indicator
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true;
+        
+        // Begin request
         FLHTTPUtils.sendAsynchronousRequest(basicURL, param_keys: param_keys, param_values: param_values, timeoutInterval: nil) { (urlResponse, data, error) -> Void in
             
+            // Hide network activity indicator
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
+            
+            // Begin with empty array
             var result: [[NSDictionary]] = [];
             
-            //var dict = XMLDictionaryParser.sharedInstance().dictionaryWithString("<?xml version=\"1.0\" encoding=\"utf-8\" ?> <body copyright=\"All data copyright Rutgers Univ. Newark College Town Shuttle 2015.\"><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"Harrison Ave &amp; Passaic Ave\" stopTag=\"harrpass\">  <direction title=\"Loop\">  <prediction epochTime=\"1430259402212\" seconds=\"835\" minutes=\"13\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430261721215\" seconds=\"3154\" minutes=\"52\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430263868158\" seconds=\"5301\" minutes=\"88\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  </direction></predictions><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"NJIT\" stopTag=\"njit\">  <direction title=\"Loop\">  <prediction epochTime=\"1430258964074\" seconds=\"397\" minutes=\"6\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430261283077\" seconds=\"2716\" minutes=\"45\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430263456522\" seconds=\"4889\" minutes=\"81\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  </direction></predictions></body>");
-            
+            // Parse data
             var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
             if (dict != nil) {
+                
+                // Get "predictions" tags
                 if let predictions = dict["predictions"] as? NSArray {
                     for _predictions in predictions {
-                        // "predictions" tag of one stop
+                        
+                        // Single "predictions" tag of one stop
                         var _p: [NSDictionary] = [];
                         if let direction = _predictions["direction"] as? NSDictionary {
                             if let prediction = direction["prediction"] as? NSArray {
@@ -133,7 +147,7 @@ class NTMNextbus {
                     return;
                 }
                 
-                // Only one stop
+                // Only one stop (only one "predictions" tag)
                 if let predictions = dict["predictions"] as? NSDictionary {
                     var _p: [NSDictionary] = [];
                     if let direction = predictions["direction"] as? NSDictionary {
@@ -159,19 +173,22 @@ class NTMNextbus {
     
     /* Get prediction data od bookmarked stops */
     static func getPredictionsOfBookmarkedStops(mode: NTMPredictionFetchMode, dataHandler: (AnyObject?, NSError!) -> Void) {
-        if var predictions = FLLocalStorageUtils.readObjectFromUserDefaults(NTMNextbus.NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
+        if var localBookmarks = FLLocalStorageUtils.readObjectFromUserDefaults(NTMNextbus.NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
             
-            if (predictions.count == 0) {
+            // Check if no bookmarks
+            if (localBookmarks.count == 0) {
                 dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
                 return;
             }
             
+            // Generate request parameters
             var routes: [String] = [], directions: [String] = [], stops: [String] = [];
-            for (var i = 0; i < predictions.count; i++) {
+            for (var i = 0; i < localBookmarks.count; i++) {
+                
                 // Parameters for request
-                routes.append(predictions[i][NTMNextbus.NTMKeyRoute] as String!);
-                directions.append(predictions[i][NTMNextbus.NTMKeyDirection] as String!);
-                stops.append(predictions[i][NTMNextbus.NTMKeyStop] as String!);
+                routes.append(localBookmarks[i][NTMNextbus.NTMKeyRoute] as String!);
+                directions.append(localBookmarks[i][NTMNextbus.NTMKeyDirection] as String!);
+                stops.append(localBookmarks[i][NTMNextbus.NTMKeyStop] as String!);
             }
             
             // Get predictions
@@ -180,7 +197,18 @@ class NTMNextbus {
                 if (error.code == 0) {
                     let responseArray = response as! [[NSDictionary]];
                     
-                    // Prediction of stops
+                    // Check number of returned stop
+                    if (responseArray.count != localBookmarks.count) {
+                        
+                        // Reply with bookmarks and empty preditions
+                        for (var i = 0; i < localBookmarks.count; i++) {
+                            localBookmarks[i][NTMNextbus.NTMKeyMinutes] = "";
+                        }
+                        dataHandler(localBookmarks, NSError(domain: "", code: 0, userInfo: nil));
+                        return;
+                    }
+                    
+                    // Stops
                     for (var i = 0; i < responseArray.count; i++) {
                         var prediction = responseArray[i];
                         var minutes: String = "";
@@ -192,8 +220,12 @@ class NTMNextbus {
                                 count = 3;
                             }
                         }
+                        
+                        // Iterate through every prediction value
                         for (var j = 0; j < count; j++) {
                             if let min = prediction[j]["_minutes"] as? String {
+                                
+                                // For Apple Watch glance scene, return only one value
                                 if (mode == NTMPredictionFetchMode.One) {
                                     minutes = min;
                                     break;
@@ -208,20 +240,33 @@ class NTMNextbus {
                                 } else {
                                     minutes += min + ", ";
                                 }
+                            } else {
+                                // Set empty value if no valid value fetched
+                                minutes = "";
                             }
                         }
-                        predictions[i][NTMNextbus.NTMKeyMinutes] = minutes;
+                        localBookmarks[i][NTMNextbus.NTMKeyMinutes] = minutes;
                     }
-                    dataHandler(predictions, NSError(domain: "", code: 0, userInfo: nil));
-                    return;
+
+                } else {
+                    // Didn't get data, set empty preditions for reply
+                    for (var i = 0; i < localBookmarks.count; i++) {
+                        localBookmarks[i][NTMNextbus.NTMKeyMinutes] = "";
+                    }
                 }
-                dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
+                // Reply with data
+                dataHandler(localBookmarks, NSError(domain: "", code: 0, userInfo: nil));
+                return;
             }
+        } else {
+            // No locally storaged data
+            dataHandler(nil, NSError(domain: "", code: 1, userInfo: nil));
+            return;
         }
     }
     
     /* Add a stop to bookmarks and write to local storage */
-    static func addStopToLocalStorage(agency: String, route: String, routeTitle: String, direction: String, directionTitle: String, stop: String, stopTitle: String) -> Void {
+    static func addStopToLocalStorage(agency: String, route: String, routeTitle: String, direction: String, directionTitle: String, stop: String, stopTitle: String) -> Bool {
         
         var dict: Dictionary<String, String> = Dictionary<String, String>();
         dict[NTMNextbus.NTMKeyAgency] = agency;
@@ -237,7 +282,7 @@ class NTMNextbus {
             // Check duplicate
             for _item in _array {
                 if (_item[NTMNextbus.NTMKeyRoute] == route && _item[NTMNextbus.NTMKeyStop] == stop) {
-                    return;
+                    return false;
                 }
             }
             
@@ -248,17 +293,20 @@ class NTMNextbus {
             array.append(dict);
         }
         FLLocalStorageUtils.writeObjectToUserDefaults(NTMBookmarksLocalStorageKey, object: array);
+        return true;
     }
     
     /* Remove a stop from local storage */
-    static func removeStopFromLocalStorage(index: Int) {
+    static func removeStopFromLocalStorage(index: Int) -> Bool {
         if var _array = FLLocalStorageUtils.readObjectFromUserDefaults(NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
             if (index >= _array.count) {
-                return;
+                return false;
             }
             _array.removeAtIndex(index);
             FLLocalStorageUtils.writeObjectToUserDefaults(NTMBookmarksLocalStorageKey, object: _array);
+            return true;
         }
+        return false;
     }
     
     static func writeDebugData() {
@@ -286,3 +334,9 @@ class NTMNextbus {
         FLLocalStorageUtils.writeObjectToUserDefaults(NTMBookmarksLocalStorageKey, object: a);
     }
 }
+
+/* Debug data
+
+//var dict = XMLDictionaryParser.sharedInstance().dictionaryWithString("<?xml version=\"1.0\" encoding=\"utf-8\" ?> <body copyright=\"All data copyright Rutgers Univ. Newark College Town Shuttle 2015.\"><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"Harrison Ave &amp; Passaic Ave\" stopTag=\"harrpass\">  <direction title=\"Loop\">  <prediction epochTime=\"1430259402212\" seconds=\"835\" minutes=\"13\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430261721215\" seconds=\"3154\" minutes=\"52\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430263868158\" seconds=\"5301\" minutes=\"88\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  </direction></predictions><predictions agencyTitle=\"Rutgers Univ. Newark College Town Shuttle\" routeTitle=\"Kearney/Harrison\" routeTag=\"kearney\" stopTitle=\"NJIT\" stopTag=\"njit\">  <direction title=\"Loop\">  <prediction epochTime=\"1430258964074\" seconds=\"397\" minutes=\"6\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430261283077\" seconds=\"2716\" minutes=\"45\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  <prediction epochTime=\"1430263456522\" seconds=\"4889\" minutes=\"81\" isDeparture=\"false\" affectedByLayover=\"true\" dirTag=\"loop\" vehicle=\"4187\" block=\"201\" />  </direction></predictions></body>");
+
+*/

@@ -46,15 +46,15 @@
                     <items>
                         <group alignment="left" id="gv7-I2-MZq">
                             <items>
-                                <label width="136" height="42" alignment="left" textAlignment="left" minimumScaleFactor="0.10000000000000014" id="IaU-KP-LGb">
+                                <label width="1" height="1" alignment="left" textAlignment="left" minimumScaleFactor="0.10000000000000014" id="IaU-KP-LGb">
                                     <fontDescription key="font" type="system" pointSize="19"/>
                                 </label>
                             </items>
                         </group>
                         <group alignment="left" id="eew-Gs-W6Y">
                             <items>
-                                <label width="136" height="97" alignment="left" textAlignment="center" minimumScaleFactor="0.10000000000000001" id="a0J-vG-Vnd">
-                                    <fontDescription key="font" type="system" pointSize="64"/>
+                                <label width="1" height="1" alignment="left" textAlignment="center" minimumScaleFactor="0.10000000000000001" id="a0J-vG-Vnd">
+                                    <fontDescription key="font" type="system" pointSize="72"/>
                                 </label>
                             </items>
                         </group>

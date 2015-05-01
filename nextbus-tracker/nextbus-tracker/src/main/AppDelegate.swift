@@ -40,12 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if arch(i386) || arch(x86_64)
             let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
             NSLog("Document Path: %@", documentsPath)
-        #endif
-        
-        self.application(UIApplication.sharedApplication(), handleWatchKitExtensionRequest: ["command":"predictions_short"]) { (a) -> Void in
             
-        }
-        
+            self.application(UIApplication.sharedApplication(), handleWatchKitExtensionRequest: ["command":"predictions_short"]) { (a) -> Void in }
+        #endif
+
         return true;
     }
     
