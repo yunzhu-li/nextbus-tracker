@@ -26,6 +26,7 @@ import MapKit
 
 class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var btnToggleList: UIBarButtonItem!
     @IBOutlet weak var mapPaths: MKMapView!
     @IBOutlet weak var tblStops: UITableView!
     
@@ -44,7 +45,25 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         super.viewDidLoad();
         // GA
         self.screenName = NSStringFromClass(self.dynamicType);
+        
+        // UI
+        btnToggleListAct(btnToggleList);
         prepareMapView();
+    }
+    
+    @IBAction func btnToggleListAct(sender: UIBarButtonItem) {
+        if (sender.title == "Map") {
+            sender.title = "List";
+            var frame = mapPaths.frame;
+            frame.size.height = UIScreen.mainScreen().bounds.height - frame.origin.y;
+            mapPaths.frame = frame;
+        } else {
+            sender.title = "Map";
+            var frame = mapPaths.frame;
+            frame.size.height = 190;
+            mapPaths.frame = frame;
+        }
+        setMapViewRegion();
     }
     
     func prepareMapView() {
@@ -56,7 +75,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
             authorizationStatus == CLAuthorizationStatus.AuthorizedAlways) {
                 mapPaths.showsUserLocation = true;
         }
-
+        
         // Remove existing overlays
         self.mapPaths.removeOverlays(plPaths);
         
@@ -79,12 +98,13 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         
         // Add annotations
         var annotations = [NTMAStops]();
-        for stop in stops {
+        for (var i = 0; i < stops.count; i++) {
+            let stop = stops[i];
             if let lat = stop[NTMNextbus.NTMLatitude] as? String {
                 if let lon = stop[NTMNextbus.NTMLongitude] as? String {
                     if let title = stop[NTMNextbus.NTMKeyTitle] as? String {
                         var coordinate = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (lon as NSString).doubleValue);
-                        var annotation = NTMAStops(title: title, coordinate: coordinate, info: "");
+                        var annotation = NTMAStops(title: title, coordinate: coordinate, info: "", stopIndex: i);
                         annotations.append(annotation);
                     }
                 }
@@ -93,6 +113,10 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         mapPaths.addAnnotations(annotations);
         
         // Set map view region
+        setMapViewRegion();
+    }
+    
+    func setMapViewRegion() {
         var latMax = routeExtent[0];
         var latMin = routeExtent[1];
         var lonMax = routeExtent[2];
@@ -101,7 +125,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         var viewSpan: MKCoordinateSpan = MKCoordinateSpanMake((latMax - latMin) * 1.5, (lonMax - lonMin) * 1.5);
         var viewCenter: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (latMin + latMax) / 2, longitude: (lonMin + lonMax) / 2);
         var r = MKCoordinateRegionMake(viewCenter, viewSpan);
-        mapPaths.setRegion(r, animated: false);
+        mapPaths.setRegion(r, animated: true);
     }
     
     // Overlay renderer
@@ -117,16 +141,33 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     
     // Annotation renderer
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        let reuseId = "MKPinAnnotationView";
-        var annotationView = mapPaths.dequeueReusableAnnotationViewWithIdentifier(reuseId);
-        if (annotationView == nil) {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId);
-            annotationView.canShowCallout = true;
-            annotationView.image = UIImage(named: "ic_stop_point");
+        // Skip user location annotation
+        if (annotation is MKUserLocation) {
+            return nil;
         }
-        return annotationView;
+        
+        if (annotation is NTMAStops) {
+            let reuseId = "MKPinAnnotationView";
+            var annotationView = mapPaths.dequeueReusableAnnotationViewWithIdentifier(reuseId);
+            if (annotationView == nil) {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId);
+                annotationView.canShowCallout = true;
+                annotationView.image = UIImage(named: "ic_stop_point");
+                
+                var btn: UIButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton;
+                btn.addTarget(self, action: "annotationBtnAct:", forControlEvents: UIControlEvents.TouchUpInside);
+                btn.tag = (annotation as! NTMAStops).stopIndex;
+                annotationView.rightCalloutAccessoryView = btn;
+            }
+            return annotationView;
+        }
+        return nil;
     }
     
+    func annotationBtnAct(sender: UIButton) {
+        var indexPath = NSIndexPath(forRow: sender.tag, inSection: 0);
+        self.tableView(tblStops, didSelectRowAtIndexPath: indexPath);
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stops.count;
