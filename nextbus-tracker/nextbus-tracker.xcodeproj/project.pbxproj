@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7907FE821AFE8EC9009B3EFB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7907FE811AFE8EC9009B3EFB /* MapKit.framework */; };
+		7907FE851AFEC20E009B3EFB /* NTMAStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907FE841AFEC20E009B3EFB /* NTMAStops.swift */; };
 		791D86B41AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */; };
 		791D86B61AEEEFCC00BCF9AA /* FLHTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */; };
 		791D86B81AEF03C300BCF9AA /* NTMNextbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */; };
@@ -73,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		7907FE811AFE8EC9009B3EFB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7907FE841AFEC20E009B3EFB /* NTMAStops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMAStops.swift; sourceTree = "<group>"; };
 		791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLLocalStorageUtils.swift; sourceTree = "<group>"; };
 		791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLHTTPUtils.swift; sourceTree = "<group>"; };
 		791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMNextbus.swift; sourceTree = "<group>"; };
@@ -145,6 +147,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7907FE831AFEC207009B3EFB /* misc */ = {
+			isa = PBXGroup;
+			children = (
+				7907FE841AFEC20E009B3EFB /* NTMAStops.swift */,
+			);
+			path = misc;
+			sourceTree = "<group>";
+		};
 		791D86B11AEEEC3000BCF9AA /* local */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +358,7 @@
 		797393D01AE99DA900CB1D32 /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				7907FE831AFEC207009B3EFB /* misc */,
 				7941BCA31AEED37000DB88D7 /* bookmarks */,
 				792434411AF084B300B3E256 /* routeselector */,
 				792434461AF0850200B3E256 /* stopselector */,
@@ -568,6 +579,7 @@
 				797393D61AE99DA900CB1D32 /* AppDelegate.swift in Sources */,
 				791D86B61AEEEFCC00BCF9AA /* FLHTTPUtils.swift in Sources */,
 				7924344A1AF0856E00B3E256 /* NTTblCellStops.swift in Sources */,
+				7907FE851AFEC20E009B3EFB /* NTMAStops.swift in Sources */,
 				792434451AF084B300B3E256 /* NTVCRouteSelector.swift in Sources */,
 				791D86B81AEF03C300BCF9AA /* NTMNextbus.swift in Sources */,
 				7924344D1AF08D4000B3E256 /* NTVCAbout.swift in Sources */,

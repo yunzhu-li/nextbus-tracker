@@ -41,7 +41,7 @@
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tblCellBookmarks" rowHeight="128" id="gBM-oc-02y" customClass="NTTblCellBookmarks" customModule="nextbus_tracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="128"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gBM-oc-02y" id="QQC-BS-8J4">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
@@ -86,7 +86,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tblCellBookmarksNew" rowHeight="128" id="aBb-L5-H2q" customClass="NTTblCellBookmarks" customModule="nextbus_tracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="150" width="320" height="128"/>
+                                        <rect key="frame" x="0.0" y="214" width="320" height="128"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aBb-L5-H2q" id="c9X-wj-L5t">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>

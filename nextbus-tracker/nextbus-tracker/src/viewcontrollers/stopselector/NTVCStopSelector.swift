@@ -77,6 +77,21 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         }
         mapPaths.addOverlays(plPaths);
         
+        // Add annotations
+        var annotations = [NTMAStops]();
+        for stop in stops {
+            if let lat = stop[NTMNextbus.NTMLatitude] as? String {
+                if let lon = stop[NTMNextbus.NTMLongitude] as? String {
+                    if let title = stop[NTMNextbus.NTMKeyTitle] as? String {
+                        var coordinate = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (lon as NSString).doubleValue);
+                        var annotation = NTMAStops(title: title, coordinate: coordinate, info: "");
+                        annotations.append(annotation);
+                    }
+                }
+            }
+        }
+        mapPaths.addAnnotations(annotations);
+        
         // Set map view region
         var latMax = routeExtent[0];
         var latMin = routeExtent[1];
@@ -89,6 +104,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         mapPaths.setRegion(r, animated: false);
     }
     
+    // Overlay renderer
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         if (overlay is MKPolyline) {
             var plRenderer = MKPolylineRenderer(overlay: overlay);
@@ -98,6 +114,19 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         }
         return nil;
     }
+    
+    // Annotation renderer
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        let reuseId = "MKPinAnnotationView";
+        var annotationView = mapPaths.dequeueReusableAnnotationViewWithIdentifier(reuseId);
+        if (annotationView == nil) {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId);
+            annotationView.canShowCallout = true;
+            annotationView.image = UIImage(named: "ic_stop_point");
+        }
+        return annotationView;
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stops.count;
