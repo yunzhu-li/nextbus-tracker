@@ -30,6 +30,8 @@ class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableV
     
     var routes: [NSDictionary] = [];
     var stopsForSelector: [NSDictionary] = [];
+    var pathsForSelector: [[NSDictionary]] = [];
+    var routeExtentForSelector: [Double] = [];
     var routeTagForSelector = "";
     var routeTitleForSelector = "";
     
@@ -62,6 +64,8 @@ class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableV
         if (segue.identifier == "PushToStopSelector") {
             let vc: NTVCStopSelector = segue.destinationViewController as! NTVCStopSelector;
             vc.stops = stopsForSelector;
+            vc.routePaths = pathsForSelector;
+            vc.routeExtent = routeExtentForSelector;
             vc.routeTag = routeTagForSelector;
             vc.routeTitle = routeTitleForSelector;
         }
@@ -89,10 +93,26 @@ class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tblRoutes.deselectRowAtIndexPath(indexPath, animated: true);
         var stops = NTMNextbus.getStopList(routes[indexPath.row]);
+        
         if (stops != nil) {
             stopsForSelector = stops!;
             if let routeTag = routes[indexPath.row][NTMNextbus.NTMKeyTag] as? String {
                 if let routeTitle = routes[indexPath.row][NTMNextbus.NTMKeyTitle] as? String {
+                    
+                    let pathCoordinates = NTMNextbus.getPathCoordinates(routes[indexPath.row]);
+                    if (pathCoordinates != nil) {
+                        pathsForSelector = pathCoordinates!;
+                    } else {
+                        return;
+                    }
+                    
+                    let routeExtent = NTMNextbus.getRouteExtent(routes[indexPath.row]);
+                    if (routeExtent != nil && routeExtent?.count == 4) {
+                        routeExtentForSelector = routeExtent!;
+                    } else {
+                        return;
+                    }
+                    
                     routeTagForSelector = routeTag;
                     routeTitleForSelector = routeTitle;
                     self.performSegueWithIdentifier("PushToStopSelector", sender: self);

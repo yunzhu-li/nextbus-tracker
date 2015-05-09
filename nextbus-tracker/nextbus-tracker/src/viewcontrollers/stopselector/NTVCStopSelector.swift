@@ -22,19 +22,81 @@
 
 import Foundation
 import UIKit
+import MapKit
 
-class NTVCStopSelector: GAITrackedViewController, UITableViewDelegate, UITableViewDataSource {
+class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var mapPaths: MKMapView!
     @IBOutlet weak var tblStops: UITableView!
     
+    // Data
     var stops: [NSDictionary] = [];
+    var routePaths: [[NSDictionary]] = [];
+    var routeExtent: [Double] = [];
     var routeTag: String = "";
     var routeTitle: String = "";
+    
+    // Map & location
+    var plPaths: [MKPolyline] = [];
+    var locationManager: CLLocationManager = CLLocationManager();
     
     override func viewDidLoad() {
         super.viewDidLoad();
         // GA
         self.screenName = NSStringFromClass(self.dynamicType);
+        prepareMapView();
+    }
+    
+    func prepareMapView() {
+        
+        // Request location permission
+        locationManager.requestWhenInUseAuthorization();
+        var authorizationStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus();
+        if (authorizationStatus == CLAuthorizationStatus.AuthorizedWhenInUse ||
+            authorizationStatus == CLAuthorizationStatus.AuthorizedAlways) {
+                mapPaths.showsUserLocation = true;
+        }
+
+        // Remove existing overlays
+        self.mapPaths.removeOverlays(plPaths);
+        
+        // Prepare overlays
+        for path in routePaths {
+            var coordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(path.count);
+            for (var i = 0; i < path.count; i++) {
+                var point: NSDictionary = path[i];
+                if let lat = point[NTMNextbus.NTMLatitude] as? NSString {
+                    if let lon = point[NTMNextbus.NTMLongitude] as? NSString {
+                        coordinates[i] = CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: lon.doubleValue);
+                    }
+                }
+            }
+            
+            plPaths.append(MKPolyline(coordinates: coordinates, count: path.count));
+            coordinates.dealloc(path.count);
+        }
+        mapPaths.addOverlays(plPaths);
+        
+        // Set map view region
+        var latMax = routeExtent[0];
+        var latMin = routeExtent[1];
+        var lonMax = routeExtent[2];
+        var lonMin = routeExtent[3];
+        
+        var viewSpan: MKCoordinateSpan = MKCoordinateSpanMake((latMax - latMin) * 1.5, (lonMax - lonMin) * 1.5);
+        var viewCenter: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (latMin + latMax) / 2, longitude: (lonMin + lonMax) / 2);
+        var r = MKCoordinateRegionMake(viewCenter, viewSpan);
+        mapPaths.setRegion(r, animated: false);
+    }
+    
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if (overlay is MKPolyline) {
+            var plRenderer = MKPolylineRenderer(overlay: overlay);
+            plRenderer.strokeColor = UIColor(red: 0, green: 0.57, blue: 1, alpha: 0.7);
+            plRenderer.lineWidth = 4;
+            return plRenderer;
+        }
+        return nil;
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

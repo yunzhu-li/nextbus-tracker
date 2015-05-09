@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7907FE821AFE8EC9009B3EFB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7907FE811AFE8EC9009B3EFB /* MapKit.framework */; };
 		791D86B41AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */; };
 		791D86B61AEEEFCC00BCF9AA /* FLHTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */; };
 		791D86B81AEF03C300BCF9AA /* NTMNextbus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7907FE811AFE8EC9009B3EFB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		791D86B31AEEEF2A00BCF9AA /* FLLocalStorageUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLLocalStorageUtils.swift; sourceTree = "<group>"; };
 		791D86B51AEEEFCC00BCF9AA /* FLHTTPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLHTTPUtils.swift; sourceTree = "<group>"; };
 		791D86B71AEF03C300BCF9AA /* NTMNextbus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMNextbus.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7907FE821AFE8EC9009B3EFB /* MapKit.framework in Frameworks */,
 				79EFD8CD1AF19F1B00324A10 /* libsqlite3.dylib in Frameworks */,
 				79EFD8CB1AF19F1400324A10 /* libz.dylib in Frameworks */,
 				79EFD8C91AF19F0C00324A10 /* SystemConfiguration.framework in Frameworks */,
@@ -359,6 +362,7 @@
 				797393D31AE99DA900CB1D32 /* Info.plist */,
 				79EFD8CC1AF19F1B00324A10 /* libsqlite3.dylib */,
 				79EFD8CA1AF19F1400324A10 /* libz.dylib */,
+				7907FE811AFE8EC9009B3EFB /* MapKit.framework */,
 				79EFD8C81AF19F0C00324A10 /* SystemConfiguration.framework */,
 				79EFD8C61AF19F0400324A10 /* CoreData.framework */,
 			);

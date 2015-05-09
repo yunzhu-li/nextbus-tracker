@@ -47,7 +47,13 @@ class NTMNextbus {
     static let NTMKeyDirection        = "d";
     static let NTMKeyStop             = "s";
     static let NTMKeyMinutes          = "_minutes";
-    
+    static let NTMLatitude            = "_lat";
+    static let NTMLongitude           = "_lon";
+    static let NTMLatitudeMax         = "_latMax";
+    static let NTMLatitudeMin         = "_latMin";
+    static let NTMLongitudeMax        = "_lonMax";
+    static let NTMLongitudeMin        = "_lonMin";
+
     /* Get route configuration */
     static func getRouteConfig(agency: String, dataHandler: (AnyObject?, NSError!) -> Void) -> Void {
         
@@ -87,6 +93,38 @@ class NTMNextbus {
     static func getStopList(route: NSDictionary) -> [NSDictionary]? {
         if let array = route["stop"] as? [NSDictionary] {
             return array;
+        } else {
+            return nil;
+        }
+    }
+    
+    /* Get route extent (maximum and minimum coordinates) by routeConfig data */
+    static func getRouteExtent(route: NSDictionary) -> [Double]? {
+        var result: [Double] = [];
+        if let latMax = route[NTMLatitudeMax] as? String  { Double(result.append((latMax as NSString).doubleValue)); } else { return nil; }
+        if let latMin = route[NTMLatitudeMin] as? String  { Double(result.append((latMin as NSString).doubleValue)); } else { return nil; }
+        if let lonMax = route[NTMLongitudeMax] as? String { Double(result.append((lonMax as NSString).doubleValue)); } else { return nil; }
+        if let lonMin = route[NTMLongitudeMin] as? String { Double(result.append((lonMin as NSString).doubleValue)); } else { return nil; }
+        
+        return result;
+    }
+    
+    /* Get path coordinates by routeConfig data */
+    static func getPathCoordinates(route: NSDictionary) -> [[NSDictionary]]? {
+        var result: [[NSDictionary]] = [];
+        
+        // Extract paths
+        if let ar_paths = route["path"] as? [NSDictionary] {
+            // For each path
+            for (var i = 0; i < ar_paths.count; i++) {
+                var path = ar_paths[i];
+                var tmp_points: [NSDictionary] = [];
+                if let points = path["point"] as? [NSDictionary] {
+                    tmp_points = points;
+                }
+                result.append(tmp_points);
+            }
+            return result;
         } else {
             return nil;
         }
@@ -247,7 +285,7 @@ class NTMNextbus {
                         }
                         localBookmarks[i][NTMNextbus.NTMKeyMinutes] = minutes;
                     }
-
+                    
                 } else {
                     // Didn't get data, set empty preditions for reply
                     for (var i = 0; i < localBookmarks.count; i++) {
