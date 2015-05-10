@@ -153,12 +153,13 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId);
                 annotationView.canShowCallout = true;
                 annotationView.image = UIImage(named: "ic_stop_point");
-                
-                var btn: UIButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton;
-                btn.addTarget(self, action: "annotationBtnAct:", forControlEvents: UIControlEvents.TouchUpInside);
-                btn.tag = (annotation as! NTMAStops).stopIndex;
-                annotationView.rightCalloutAccessoryView = btn;
             }
+            
+            var btn: UIButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton;
+            btn.addTarget(self, action: "annotationBtnAct:", forControlEvents: UIControlEvents.TouchUpInside);
+            btn.tag = (annotation as! NTMAStops).stopIndex;
+            annotationView.rightCalloutAccessoryView = btn;
+            
             return annotationView;
         }
         return nil;
