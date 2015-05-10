@@ -40,9 +40,11 @@ class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableV
         
         // GA
         self.screenName = NSStringFromClass(self.dynamicType);
-        
+                
+        // UI
         self.tblRoutes.hidden = true;
         
+        // Data
         NTMNextbus.getRouteConfig(NTMNextbus.NTMDefaultAgency) { (result, error) -> Void in
             if (error.code != 0) {
                 self.lblStatus.text = "Failed to get route data";

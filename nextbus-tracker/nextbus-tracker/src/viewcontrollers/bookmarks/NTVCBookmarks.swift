@@ -21,11 +21,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewDataSource {
     // UI
     @IBOutlet weak var tblBookmarks: UITableView!
     var tblRefreshControl: UIRefreshControl!
+    
+    // Location manager
+    var locationManager: CLLocationManager = CLLocationManager();
     
     // Data
     var preditions: [Dictionary<String, String>] = [];
@@ -34,6 +38,9 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        // Request location permission
+        locationManager.requestWhenInUseAuthorization();
         
         // GA
         self.screenName = NSStringFromClass(self.dynamicType);

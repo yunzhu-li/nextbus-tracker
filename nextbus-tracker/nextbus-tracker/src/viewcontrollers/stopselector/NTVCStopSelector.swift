@@ -39,7 +39,6 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     
     // Map & location
     var plPaths: [MKPolyline] = [];
-    var locationManager: CLLocationManager = CLLocationManager();
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -68,8 +67,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     
     func prepareMapView() {
         
-        // Request location permission
-        locationManager.requestWhenInUseAuthorization();
+        // Show location if permitted
         var authorizationStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus();
         if (authorizationStatus == CLAuthorizationStatus.AuthorizedWhenInUse ||
             authorizationStatus == CLAuthorizationStatus.AuthorizedAlways) {
