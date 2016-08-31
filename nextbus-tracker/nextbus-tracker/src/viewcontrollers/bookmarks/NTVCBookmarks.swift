@@ -23,7 +23,7 @@
 import UIKit
 import CoreLocation
 
-class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewDataSource {
+class NTVCBookmarks: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // UI
     @IBOutlet weak var tblBookmarks: UITableView!
     var tblRefreshControl: UIRefreshControl!
@@ -42,9 +42,6 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
         // Request location permission
         locationManager.requestWhenInUseAuthorization();
         
-        // GA
-        self.screenName = NSStringFromClass(self.dynamicType);
-        
         // Configure navigation bar appearance
         self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 0.57, blue: 1, alpha: 1);
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor();
@@ -52,7 +49,7 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
         
         // Configure Refresh Control
         self.tblRefreshControl = UIRefreshControl();
-        self.tblRefreshControl.addTarget(self, action: "refreshData", forControlEvents: UIControlEvents.ValueChanged);
+        self.tblRefreshControl.addTarget(self, action: #selector(NTVCBookmarks.refreshData), forControlEvents: UIControlEvents.ValueChanged);
         self.tblRefreshControl.tintColor = UIColor.whiteColor();
         self.tblBookmarks.addSubview(tblRefreshControl)
         
@@ -63,25 +60,32 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated);
         initialReload = true;
         refreshData();
-        tmAutoRefresh.invalidate();
-        tmAutoRefresh = NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: "refreshData", userInfo: nil, repeats: true);
+        self.enableRefreshTimer(true);
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated);
-        tmAutoRefresh.invalidate();
+        self.enableRefreshTimer(false);
     }
     
     @IBAction func btnAddAct(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("PushToRouteSelector", sender: self);
     }
     
+    func enableRefreshTimer(enabled: Bool) {
+        tmAutoRefresh.invalidate();
+        if (enabled) {
+            tmAutoRefresh.invalidate();
+            tmAutoRefresh = NSTimer.scheduledTimerWithTimeInterval(7, target: self, selector: #selector(NTVCBookmarks.refreshData), userInfo: nil, repeats: true);
+        }
+    }
+
     func refreshData() {
         self.preditions = [];
         if let array = FLLocalStorageUtils.readObjectFromUserDefaults(NTMNextbus.NTMBookmarksLocalStorageKey) as? [Dictionary<String, String>] {
             
             var routes: [String] = [], directions: [String] = [], stops: [String] = [];
-            for (var i = 0; i < array.count; i++) {
+            for i in 0 ..< array.count {
                 
                 var prediction = array[i];
                 prediction[NTMNextbus.NTMKeyMinutes] = "Refreshing...";
@@ -93,10 +97,8 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
                 stops.append(array[i][NTMNextbus.NTMKeyStop] as String!);
             }
             
-            if (initialReload) {
-                initialReload = false;
-                self.tblBookmarks.reloadData();
-            }
+            // Show "Refreshing..." in cells
+            self.tblBookmarks.reloadData();
             
             // Get predictions
             NTMNextbus.getPredictionsOfBookmarkedStops(NTMNextbus.NTMPredictionFetchMode.Full) { (data, error) -> Void in
@@ -119,8 +121,7 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if (indexPath.row == preditions.count) {
-            let cell: UITableViewCell = tblBookmarks.dequeueReusableCellWithIdentifier("tblCellBookmarksNew") as! UITableViewCell;
-            return cell;
+            return tblBookmarks.dequeueReusableCellWithIdentifier("tblCellBookmarksNew")!;
         }
         
         let cell: NTTblCellBookmarks = tblBookmarks.dequeueReusableCellWithIdentifier("tblCellBookmarks") as! NTTblCellBookmarks;
@@ -149,6 +150,14 @@ class NTVCBookmarks: GAITrackedViewController, UITableViewDelegate, UITableViewD
             return true;
         }
         return false;
+    }
+    
+    func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+        self.enableRefreshTimer(false);
+    }
+    
+    func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+        self.enableRefreshTimer(true);
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

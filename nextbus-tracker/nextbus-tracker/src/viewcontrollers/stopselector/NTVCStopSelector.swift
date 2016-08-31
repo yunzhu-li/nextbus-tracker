@@ -24,7 +24,7 @@ import Foundation
 import UIKit
 import MapKit
 
-class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class NTVCStopSelector: UIViewController, MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var btnToggleList: UIBarButtonItem!
     @IBOutlet weak var mapPaths: MKMapView!
@@ -42,9 +42,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        // GA
-        self.screenName = NSStringFromClass(self.dynamicType);
-        
+
         // UI
         btnToggleListAct(btnToggleList);
         prepareMapView();
@@ -68,7 +66,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     func prepareMapView() {
         
         // Show location if permitted
-        var authorizationStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus();
+        let authorizationStatus: CLAuthorizationStatus = CLLocationManager.authorizationStatus();
         if (authorizationStatus == CLAuthorizationStatus.AuthorizedWhenInUse ||
             authorizationStatus == CLAuthorizationStatus.AuthorizedAlways) {
                 mapPaths.showsUserLocation = true;
@@ -79,9 +77,9 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         
         // Prepare overlays
         for path in routePaths {
-            var coordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(path.count);
-            for (var i = 0; i < path.count; i++) {
-                var point: NSDictionary = path[i];
+            let coordinates = UnsafeMutablePointer<CLLocationCoordinate2D>.alloc(path.count);
+            for i in 0 ..< path.count {
+                let point: NSDictionary = path[i];
                 if let lat = point[NTMNextbus.NTMLatitude] as? NSString {
                     if let lon = point[NTMNextbus.NTMLongitude] as? NSString {
                         coordinates[i] = CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: lon.doubleValue);
@@ -96,13 +94,13 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
         
         // Add annotations
         var annotations = [NTMAStops]();
-        for (var i = 0; i < stops.count; i++) {
+        for i in 0 ..< stops.count {
             let stop = stops[i];
             if let lat = stop[NTMNextbus.NTMLatitude] as? String {
                 if let lon = stop[NTMNextbus.NTMLongitude] as? String {
                     if let title = stop[NTMNextbus.NTMKeyTitle] as? String {
-                        var coordinate = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (lon as NSString).doubleValue);
-                        var annotation = NTMAStops(title: title, coordinate: coordinate, info: "", stopIndex: i);
+                        let coordinate = CLLocationCoordinate2D(latitude: (lat as NSString).doubleValue, longitude: (lon as NSString).doubleValue);
+                        let annotation = NTMAStops(title: title, coordinate: coordinate, info: "", stopIndex: i);
                         annotations.append(annotation);
                     }
                 }
@@ -115,30 +113,30 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     }
     
     func setMapViewRegion() {
-        var latMax = routeExtent[0];
-        var latMin = routeExtent[1];
-        var lonMax = routeExtent[2];
-        var lonMin = routeExtent[3];
+        let latMax = routeExtent[0];
+        let latMin = routeExtent[1];
+        let lonMax = routeExtent[2];
+        let lonMin = routeExtent[3];
         
-        var viewSpan: MKCoordinateSpan = MKCoordinateSpanMake((latMax - latMin) * 1.5, (lonMax - lonMin) * 1.5);
-        var viewCenter: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (latMin + latMax) / 2, longitude: (lonMin + lonMax) / 2);
-        var r = MKCoordinateRegionMake(viewCenter, viewSpan);
+        let viewSpan: MKCoordinateSpan = MKCoordinateSpanMake((latMax - latMin) * 1.5, (lonMax - lonMin) * 1.5);
+        let viewCenter: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: (latMin + latMax) / 2, longitude: (lonMin + lonMax) / 2);
+        let r = MKCoordinateRegionMake(viewCenter, viewSpan);
         mapPaths.setRegion(r, animated: true);
     }
     
     // Overlay renderer
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         if (overlay is MKPolyline) {
-            var plRenderer = MKPolylineRenderer(overlay: overlay);
+            let plRenderer = MKPolylineRenderer(overlay: overlay);
             plRenderer.strokeColor = UIColor(red: 0, green: 0.57, blue: 1, alpha: 0.7);
             plRenderer.lineWidth = 4;
             return plRenderer;
         }
-        return nil;
+        return MKOverlayRenderer(overlay: overlay);
     }
     
     // Annotation renderer
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         // Skip user location annotation
         if (annotation is MKUserLocation) {
             return nil;
@@ -149,14 +147,14 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
             var annotationView = mapPaths.dequeueReusableAnnotationViewWithIdentifier(reuseId);
             if (annotationView == nil) {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId);
-                annotationView.canShowCallout = true;
-                annotationView.image = UIImage(named: "ic_stop_point");
+                annotationView!.canShowCallout = true;
+                annotationView!.image = UIImage(named: "ic_stop_point");
             }
             
-            var btn: UIButton = UIButton.buttonWithType(UIButtonType.ContactAdd) as! UIButton;
-            btn.addTarget(self, action: "annotationBtnAct:", forControlEvents: UIControlEvents.TouchUpInside);
+            let btn: UIButton = UIButton(type: UIButtonType.ContactAdd) ;
+            btn.addTarget(self, action: #selector(NTVCStopSelector.annotationBtnAct(_:)), forControlEvents: UIControlEvents.TouchUpInside);
             btn.tag = (annotation as! NTMAStops).stopIndex;
-            annotationView.rightCalloutAccessoryView = btn;
+            annotationView!.rightCalloutAccessoryView = btn;
             
             return annotationView;
         }
@@ -164,7 +162,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     }
     
     func annotationBtnAct(sender: UIButton) {
-        var indexPath = NSIndexPath(forRow: sender.tag, inSection: 0);
+        let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0);
         self.tableView(tblStops, didSelectRowAtIndexPath: indexPath);
     }
     
@@ -174,7 +172,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell: NTTblCellStops = tblStops.dequeueReusableCellWithIdentifier("tblCellStops") as! NTTblCellStops;
+        let cell: NTTblCellStops = tblStops.dequeueReusableCellWithIdentifier("tblCellStops") as! NTTblCellStops;
         
         // Configure cell display
         if let stopTitle = stops[indexPath.row][NTMNextbus.NTMKeyTitle] as? String {
@@ -195,7 +193,7 @@ class NTVCStopSelector: GAITrackedViewController, MKMapViewDelegate, UITableView
                 
                 if (!b) {
                     // Pop alert
-                    var alert = UIAlertController(title: "Can't save stop", message: "Stop already saved.", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Can't save stop", message: "Stop already saved.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                     

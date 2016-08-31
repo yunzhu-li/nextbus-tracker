@@ -35,13 +35,16 @@ class NTMNextbus {
         case One        // Return at most 1 prediction
     }
     
-    static let NTMDefaultAgency       = "rutgers-newark";
-    static let NTMDefaultAgencyTitle  = "Rutgers Univ. Newark College Town Shuttle";
+    static let NTMDefaultAgency       = "rutgers";
+    static let NTMDefaultAgencyTitle  = "Rutgers University";
     static let NTMKeyCommand          = "command";
     static let NTMKeyTitle            = "_title";
     static let NTMKeyTag              = "_tag";
+    static let NTMKeyRouteTag         = "_routeTag";
     static let NTMKeyRouteTitle       = "routeTitle";
+    static let NTMKeyStopTag          = "_stopTag";
     static let NTMKeyStopTitle        = "stopTitle";
+    static let NTMKeyDirectionTag     = "_dirTag";
     static let NTMKeyAgency           = "a";
     static let NTMKeyRoute            = "r";
     static let NTMKeyDirection        = "d";
@@ -71,7 +74,7 @@ class NTMNextbus {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
             
             // Parse data
-            var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
+            let dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
             if (dict != nil) {
                 dataHandler(dict, NSError(domain: "", code: 0, userInfo: nil));
                 return;
@@ -82,8 +85,16 @@ class NTMNextbus {
     
     /* Get route list by routeConfig data */
     static func getRouteList(routeConfig: NSDictionary) -> [NSDictionary]? {
+        // TODO: Filtering non-loop routes out for now
+        let whiteListedRoutes = ["kearney", "penn", "pennexpr", "mdntpenn", "connect"];
         if let array = routeConfig["route"] as? [NSDictionary] {
-            return array;
+            var result = [NSDictionary]();
+            for _route in array {
+                if _route[NTMKeyTag] is String && whiteListedRoutes.contains(_route[NTMKeyTag] as! String) {
+                    result.append(_route);
+                }
+            }
+            return result;
         } else {
             return nil;
         }
@@ -101,10 +112,10 @@ class NTMNextbus {
     /* Get route extent (maximum and minimum coordinates) by routeConfig data */
     static func getRouteExtent(route: NSDictionary) -> [Double]? {
         var result: [Double] = [];
-        if let latMax = route[NTMLatitudeMax] as? String  { Double(result.append((latMax as NSString).doubleValue)); } else { return nil; }
-        if let latMin = route[NTMLatitudeMin] as? String  { Double(result.append((latMin as NSString).doubleValue)); } else { return nil; }
-        if let lonMax = route[NTMLongitudeMax] as? String { Double(result.append((lonMax as NSString).doubleValue)); } else { return nil; }
-        if let lonMin = route[NTMLongitudeMin] as? String { Double(result.append((lonMin as NSString).doubleValue)); } else { return nil; }
+        if let latMax = route[NTMLatitudeMax] as? String  { result.append((latMax as NSString).doubleValue); } else { return nil; }
+        if let latMin = route[NTMLatitudeMin] as? String  { result.append((latMin as NSString).doubleValue); } else { return nil; }
+        if let lonMax = route[NTMLongitudeMax] as? String { result.append((lonMax as NSString).doubleValue); } else { return nil; }
+        if let lonMin = route[NTMLongitudeMin] as? String { result.append((lonMin as NSString).doubleValue); } else { return nil; }
         
         return result;
     }
@@ -116,8 +127,8 @@ class NTMNextbus {
         // Extract paths
         if let ar_paths = route["path"] as? [NSDictionary] {
             // For each path
-            for (var i = 0; i < ar_paths.count; i++) {
-                var path = ar_paths[i];
+            for i in 0 ..< ar_paths.count {
+                let path = ar_paths[i];
                 var tmp_points: [NSDictionary] = [];
                 if let points = path["point"] as? [NSDictionary] {
                     tmp_points = points;
@@ -140,7 +151,7 @@ class NTMNextbus {
         param_keys.append(NTMKeyCommand); param_values.append("predictionsForMultiStops");
         param_keys.append(NTMKeyAgency);  param_values.append(agency);
         
-        for (var i = 0; i < routes.count; i++) {
+        for i in 0 ..< routes.count {
             param_keys.append("stops");
             param_values.append(routes[i] + "|" + directions[i] + "|" + stops[i]);
         }
@@ -154,8 +165,11 @@ class NTMNextbus {
             // Hide network activity indicator
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false;
             
-            // Begin with empty array
+            // Begin with pre-allocated array
             var result: [[NSDictionary]] = [];
+            for _ in 0 ..< routes.count {
+                result.append([]);
+            }
             
             // Parse data
             var dict = XMLDictionaryParser.sharedInstance().dictionaryWithData(data);
@@ -179,7 +193,15 @@ class NTMNextbus {
                                 _p.append(prediction);
                             }
                         }
-                        result.append(_p);
+                        
+                        // Find the index
+                        for i in 0 ..< routes.count {
+                            if (_predictions[NTMKeyRouteTag] is String && _predictions[NTMKeyRouteTag] as! String == routes[i] &&
+                                _predictions[NTMKeyStopTag] is String && _predictions[NTMKeyStopTag] as! String == stops[i]) {
+
+                                result[i] = _p;
+                            }
+                        }
                     }
                     dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
                     return;
@@ -199,7 +221,7 @@ class NTMNextbus {
                         if let prediction = direction["prediction"] as? NSDictionary {
                             _p.append(prediction);
                         }
-                        result.append(_p);
+                        result[0] = _p;
                     }
                 }
                 dataHandler(result, NSError(domain: "", code: 0, userInfo: nil));
@@ -221,7 +243,7 @@ class NTMNextbus {
             
             // Generate request parameters
             var routes: [String] = [], directions: [String] = [], stops: [String] = [];
-            for (var i = 0; i < localBookmarks.count; i++) {
+            for i in 0 ..< localBookmarks.count {
                 
                 // Parameters for request
                 routes.append(localBookmarks[i][NTMNextbus.NTMKeyRoute] as String!);
@@ -239,7 +261,7 @@ class NTMNextbus {
                     if (responseArray.count != localBookmarks.count) {
                         
                         // Reply with bookmarks and empty preditions
-                        for (var i = 0; i < localBookmarks.count; i++) {
+                        for i in 0 ..< localBookmarks.count {
                             localBookmarks[i][NTMNextbus.NTMKeyMinutes] = "";
                         }
                         dataHandler(localBookmarks, NSError(domain: "", code: 0, userInfo: nil));
@@ -247,7 +269,7 @@ class NTMNextbus {
                     }
                     
                     // Stops
-                    for (var i = 0; i < responseArray.count; i++) {
+                    for i in 0 ..< responseArray.count {
                         var prediction = responseArray[i];
                         var minutes: String = "";
                         
@@ -260,7 +282,7 @@ class NTMNextbus {
                         }
                         
                         // Iterate through every prediction value
-                        for (var j = 0; j < count; j++) {
+                        for j in 0 ..< count {
                             if let min = prediction[j]["_minutes"] as? String {
                                 
                                 // For Apple Watch glance scene, return only one value
@@ -288,7 +310,7 @@ class NTMNextbus {
                     
                 } else {
                     // Didn't get data, set empty preditions for reply
-                    for (var i = 0; i < localBookmarks.count; i++) {
+                    for i in 0 ..< localBookmarks.count {
                         localBookmarks[i][NTMNextbus.NTMKeyMinutes] = "";
                     }
                 }
@@ -351,7 +373,7 @@ class NTMNextbus {
         var d = Dictionary <String, AnyObject>();
         var a: [Dictionary<String, AnyObject>] = [];
         
-        d[NTMNextbus.NTMKeyAgency] = "rutgers-newark";
+        d[NTMNextbus.NTMKeyAgency] = "rutgers";
         d[NTMNextbus.NTMKeyRoute] = "kearney";
         d[NTMNextbus.NTMKeyRouteTitle] = "Kearney/Harrison";
         d[NTMNextbus.NTMKeyDirection] = "loop";
@@ -360,7 +382,7 @@ class NTMNextbus {
         
         a.append(d);
         
-        d[NTMNextbus.NTMKeyAgency] = "rutgers-newark";
+        d[NTMNextbus.NTMKeyAgency] = "rutgers";
         d[NTMNextbus.NTMKeyRoute] = "kearney";
         d[NTMNextbus.NTMKeyRouteTitle] = "Kearney/Harrison";
         d[NTMNextbus.NTMKeyDirection] = "loop";

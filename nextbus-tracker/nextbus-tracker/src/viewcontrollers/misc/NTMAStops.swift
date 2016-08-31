@@ -24,7 +24,7 @@ import Foundation
 import MapKit
 
 class NTMAStops: NSObject, MKAnnotation {
-    var title: String
+    var title: String?
     var coordinate: CLLocationCoordinate2D
     var info: String
     var stopIndex: Int

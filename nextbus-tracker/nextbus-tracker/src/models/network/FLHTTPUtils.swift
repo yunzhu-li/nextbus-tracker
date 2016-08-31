@@ -27,11 +27,11 @@ class FLHTTPUtils {
     
     /* PercentEscape Encoder */
     static func encodeToPercentEscapeString(input: String) -> String? {
-        return input.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding);
+        return input.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet());
     }
     
     /* Send asynchronous request */
-    static func sendAsynchronousRequest(urlString: String, param_keys: [String]?, param_values: [String]?, timeoutInterval: NSTimeInterval?, completionHandler: (NSURLResponse!, NSData!, NSError!) -> Void) {
+    static func sendAsynchronousRequest(urlString: String, param_keys: [String]?, param_values: [String]?, timeoutInterval: NSTimeInterval?, completionHandler: (NSURLResponse?, NSData?, NSError?) -> Void) {
         var _urlString = String(urlString);
         var isFirstParam = true;
         
@@ -40,7 +40,7 @@ class FLHTTPUtils {
             if let _param_values = param_values {
                 // Perform check
                 assert(_param_keys.count == _param_values.count, "The number of keys and values must be equal.");
-                for (var i = 0; i < _param_keys.count; i++) {
+                for i in 0..<_param_keys.count {
                     // New field
                     if (isFirstParam) {
                         isFirstParam = false;
@@ -55,8 +55,13 @@ class FLHTTPUtils {
             }
         }
         
+        // Log URL while debugging
+        #if arch(i386) || arch(x86_64)
+            NSLog("%@", _urlString);
+        #endif
+        
         // Create NSURL and NSURLRequest
-        var _url = NSURL(string: _urlString)!;
+        let _url = NSURL(string: _urlString)!;
         var _req: NSURLRequest;
         
         // Set timeoutInterval

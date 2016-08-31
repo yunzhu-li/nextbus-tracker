@@ -28,59 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?;
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        // GA
-        GAI.sharedInstance().trackUncaughtExceptions = true;
-        GAI.sharedInstance().dispatchInterval = 12;
-        GAI.sharedInstance().trackerWithTrackingId("UA-61812304-3");
-        
+
         // Status bar
         UIApplication.sharedApplication().statusBarStyle = .LightContent;
         
         #if arch(i386) || arch(x86_64)
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! NSString
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
             NSLog("Document Path: %@", documentsPath)
-            
-            self.application(UIApplication.sharedApplication(), handleWatchKitExtensionRequest: ["command":"predictions_short"]) { (a) -> Void in }
         #endif
 
         return true;
-    }
-    
-    /* Handle requests from WitchKit extension */
-    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
-        
-        let btid = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler { () -> Void in
-            reply(["predictions" : [Dictionary<String, String>]()]);
-        }
-        
-        if let _userInfo = userInfo as? [String : String] {
-            if (_userInfo.indexForKey("command") == nil) {
-                return;
-            }
-            
-            var mode = NTMNextbus.NTMPredictionFetchMode.Short;
-            switch _userInfo["command"]! {
-            case "predictions_short":
-                mode = NTMNextbus.NTMPredictionFetchMode.Short;
-            case "predictions_one":
-                mode = NTMNextbus.NTMPredictionFetchMode.One;
-            default:
-                mode = NTMNextbus.NTMPredictionFetchMode.Short;
-            }
-            
-            NTMNextbus.getPredictionsOfBookmarkedStops(mode) { (data, error) -> Void in
-                if (error.code == 0) {
-                    if let predictions = data as? [Dictionary<String, String>] {
-                        reply(["predictions" : predictions]);
-                        UIApplication.sharedApplication().endBackgroundTask(btid);
-                        return;
-                    }
-                }
-                reply(["predictions" : [Dictionary<String, String>]()]);
-                UIApplication.sharedApplication().endBackgroundTask(btid);
-            }
-        }
     }
     
     func applicationWillResignActive(application: UIApplication) {

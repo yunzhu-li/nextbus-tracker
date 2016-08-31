@@ -23,15 +23,13 @@
 import Foundation
 import UIKit
 
-class NTVCAbout: GAITrackedViewController {
+class NTVCAbout: UIViewController {
     
     @IBOutlet weak var lblVersion: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        // GA
-        self.screenName = NSStringFromClass(self.dynamicType);
-        
+
         // Version
         if let ver = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
             lblVersion.text = ver;

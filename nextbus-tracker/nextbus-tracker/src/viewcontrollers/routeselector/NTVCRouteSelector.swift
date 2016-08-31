@@ -23,7 +23,7 @@
 import Foundation
 import UIKit
 
-class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableViewDataSource {
+class NTVCRouteSelector: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tblRoutes: UITableView!
     @IBOutlet weak var lblStatus: UILabel!
@@ -37,10 +37,7 @@ class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad();
-        
-        // GA
-        self.screenName = NSStringFromClass(self.dynamicType);
-                
+
         // UI
         self.tblRoutes.hidden = true;
         
@@ -79,12 +76,12 @@ class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell: NTTblCellRoutes = tblRoutes.dequeueReusableCellWithIdentifier("tblCellRoutes") as! NTTblCellRoutes;
+        let cell: NTTblCellRoutes = tblRoutes.dequeueReusableCellWithIdentifier("tblCellRoutes") as! NTTblCellRoutes;
         
         // Configure cell display
         if let routeTitle = routes[indexPath.row][NTMNextbus.NTMKeyTitle] as? String {
             cell.lblRoute.text = routeTitle;
-            var stops = NTMNextbus.getStopList(routes[indexPath.row]);
+            let stops = NTMNextbus.getStopList(routes[indexPath.row]);
             if (stops != nil) {
                 cell.lblRouteInfo.text = String(stops!.count) + " stops";
             }
@@ -94,7 +91,7 @@ class NTVCRouteSelector: GAITrackedViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tblRoutes.deselectRowAtIndexPath(indexPath, animated: true);
-        var stops = NTMNextbus.getStopList(routes[indexPath.row]);
+        let stops = NTMNextbus.getStopList(routes[indexPath.row]);
         
         if (stops != nil) {
             stopsForSelector = stops!;
