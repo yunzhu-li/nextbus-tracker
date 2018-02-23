@@ -23,5 +23,5 @@
 import Foundation
 
 class NTGlobal {
-    static let sharedInstance = NTGlobal();
+    static let sharedInstance = NTGlobal()
 }

@@ -28,93 +28,95 @@ class NTVCRouteSelector: UIViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var tblRoutes: UITableView!
     @IBOutlet weak var lblStatus: UILabel!
     
-    var routes: [NSDictionary] = [];
-    var stopsForSelector: [NSDictionary] = [];
-    var pathsForSelector: [[NSDictionary]] = [];
-    var routeExtentForSelector: [Double] = [];
-    var routeTagForSelector = "";
-    var routeTitleForSelector = "";
+    var routes: [NSDictionary] = []
+    var stopsForSelector: [NSDictionary] = []
+    var pathsForSelector: [[NSDictionary]] = []
+    var routeExtentForSelector: [Double] = []
+    var routeTagForSelector = ""
+    var routeTitleForSelector = ""
     
     override func viewDidLoad() {
-        super.viewDidLoad();
+        super.viewDidLoad()
 
         // UI
-        self.tblRoutes.hidden = true;
+        self.tblRoutes.isHidden = true
         
         // Data
-        NTMNextbus.getRouteConfig(NTMNextbus.NTMDefaultAgency) { (result, error) -> Void in
-            if (error.code != 0) {
-                self.lblStatus.text = "Failed to get route data";
+        NTMNextbus.getRouteConfig(agency: NTMNextbus.NTMDefaultAgency) { (result, error) -> Void in
+            if error != nil {
+                self.lblStatus.text = error
             }
-            
+
             if let _result = result as? NSDictionary {
-                let _routes = NTMNextbus.getRouteList(_result);
+                let _routes = NTMNextbus.getRouteList(routeConfig: _result)
                 if (_routes != nil) {
-                    self.routes = _routes!;
-                    self.tblRoutes.reloadData();
-                    self.tblRoutes.hidden = false;
-                    self.lblStatus.hidden = true;
+                    self.routes = _routes!
+                    self.tblRoutes.reloadData()
+                    self.tblRoutes.isHidden = false
+                    self.lblStatus.isHidden = true
+                } else {
+                    self.lblStatus.text = "No routes returned from server"
                 }
             }
         }
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "PushToStopSelector") {
-            let vc: NTVCStopSelector = segue.destinationViewController as! NTVCStopSelector;
-            vc.stops = stopsForSelector;
-            vc.routePaths = pathsForSelector;
-            vc.routeExtent = routeExtentForSelector;
-            vc.routeTag = routeTagForSelector;
-            vc.routeTitle = routeTitleForSelector;
+            let vc: NTVCStopSelector = segue.destination as! NTVCStopSelector
+            vc.stops = stopsForSelector
+            vc.routePaths = pathsForSelector
+            vc.routeExtent = routeExtentForSelector
+            vc.routeTag = routeTagForSelector
+            vc.routeTitle = routeTitleForSelector
         }
     }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return routes.count;
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return routes.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: NTTblCellRoutes = tblRoutes.dequeueReusableCellWithIdentifier("tblCellRoutes") as! NTTblCellRoutes;
+        let cell: NTTblCellRoutes = tblRoutes.dequeueReusableCell(withIdentifier: "tblCellRoutes") as! NTTblCellRoutes
         
         // Configure cell display
         if let routeTitle = routes[indexPath.row][NTMNextbus.NTMKeyTitle] as? String {
-            cell.lblRoute.text = routeTitle;
-            let stops = NTMNextbus.getStopList(routes[indexPath.row]);
+            cell.lblRoute.text = routeTitle
+            let stops = NTMNextbus.getStopList(route: routes[indexPath.row])
             if (stops != nil) {
-                cell.lblRouteInfo.text = String(stops!.count) + " stops";
+                cell.lblRouteInfo.text = String(stops!.count) + " stops"
             }
         }
-        return cell;
+        return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tblRoutes.deselectRowAtIndexPath(indexPath, animated: true);
-        let stops = NTMNextbus.getStopList(routes[indexPath.row]);
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tblRoutes.deselectRow(at: indexPath, animated: true)
+        let stops = NTMNextbus.getStopList(route: routes[indexPath.row])
         
         if (stops != nil) {
-            stopsForSelector = stops!;
+            stopsForSelector = stops!
             if let routeTag = routes[indexPath.row][NTMNextbus.NTMKeyTag] as? String {
                 if let routeTitle = routes[indexPath.row][NTMNextbus.NTMKeyTitle] as? String {
                     
-                    let pathCoordinates = NTMNextbus.getPathCoordinates(routes[indexPath.row]);
+                    let pathCoordinates = NTMNextbus.getPathCoordinates(route: routes[indexPath.row])
                     if (pathCoordinates != nil) {
-                        pathsForSelector = pathCoordinates!;
+                        pathsForSelector = pathCoordinates!
                     } else {
-                        return;
+                        return
                     }
                     
-                    let routeExtent = NTMNextbus.getRouteExtent(routes[indexPath.row]);
+                    let routeExtent = NTMNextbus.getRouteExtent(route: routes[indexPath.row])
                     if (routeExtent != nil && routeExtent?.count == 4) {
-                        routeExtentForSelector = routeExtent!;
+                        routeExtentForSelector = routeExtent!
                     } else {
-                        return;
+                        return
                     }
                     
-                    routeTagForSelector = routeTag;
-                    routeTitleForSelector = routeTitle;
-                    self.performSegueWithIdentifier("PushToStopSelector", sender: self);
+                    routeTagForSelector = routeTag
+                    routeTitleForSelector = routeTitle
+                    self.performSegue(withIdentifier: "PushToStopSelector", sender: self)
                 }
             }
         }

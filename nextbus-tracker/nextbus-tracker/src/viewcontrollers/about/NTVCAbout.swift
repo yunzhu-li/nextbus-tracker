@@ -28,24 +28,24 @@ class NTVCAbout: UIViewController {
     @IBOutlet weak var lblVersion: UILabel!
     
     override func viewDidLoad() {
-        super.viewDidLoad();
+        super.viewDidLoad()
 
         // Version
-        if let ver = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String {
-            lblVersion.text = ver;
+        if let ver = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            lblVersion.text = ver
         }
     }
     
-    @IBAction func btnLinkAct(sender: UIButton) {
-        var url: String = "";
+    @IBAction func btnLinkAct(_ sender: UIButton) {
+        var url: String = ""
         switch sender.tag {
         case 1:
-            url = "https://github.com/yunzhu-li/nextbus-tracker";
+            url = "https://github.com/yunzhu-li/nextbus-tracker"
         case 2:
-            url = "https://yunzhu.li";
+            url = "https://yunzhu.li"
         default:
-            url = "https://yunzhu.li";
+            url = "https://yunzhu.li"
         }
-        UIApplication.sharedApplication().openURL(NSURL(string: url)!);
+        UIApplication.shared.openURL(NSURL(string: url)! as URL)
     }
 }

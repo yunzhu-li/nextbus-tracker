@@ -33,6 +33,6 @@ class NTMAStops: NSObject, MKAnnotation {
         self.title = title
         self.coordinate = coordinate
         self.info = info
-        self.stopIndex = stopIndex;
+        self.stopIndex = stopIndex
     }
 }

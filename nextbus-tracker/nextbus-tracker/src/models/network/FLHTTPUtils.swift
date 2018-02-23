@@ -23,55 +23,55 @@
 import Foundation
 
 class FLHTTPUtils {
-    static let FLDefaultTimeoutInterval: NSTimeInterval = 5;
+    static let FLDefaultTimeoutInterval: TimeInterval = 5
     
     /* PercentEscape Encoder */
     static func encodeToPercentEscapeString(input: String) -> String? {
-        return input.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet());
+        return input.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
     }
     
     /* Send asynchronous request */
-    static func sendAsynchronousRequest(urlString: String, param_keys: [String]?, param_values: [String]?, timeoutInterval: NSTimeInterval?, completionHandler: (NSURLResponse?, NSData?, NSError?) -> Void) {
-        var _urlString = String(urlString);
-        var isFirstParam = true;
+    static func sendAsynchronousRequest(urlString: String, param_keys: [String]?, param_values: [String]?, timeoutInterval: TimeInterval?, completionHandler: @escaping (URLResponse?, Data?, Error?) -> Void) {
+        var _urlString = String(urlString)
+        var isFirstParam = true
         
         // Append parameters
         if let _param_keys = param_keys {
             if let _param_values = param_values {
                 // Perform check
-                assert(_param_keys.count == _param_values.count, "The number of keys and values must be equal.");
+                assert(_param_keys.count == _param_values.count, "The number of keys and values must be equal.")
                 for i in 0..<_param_keys.count {
                     // New field
                     if (isFirstParam) {
-                        isFirstParam = false;
-                        _urlString += "?";
+                        isFirstParam = false
+                        _urlString += "?"
                     } else {
-                        _urlString += "&";
+                        _urlString += "&"
                     }
                     
                     // Append value
-                    _urlString += self.encodeToPercentEscapeString(_param_keys[i])! + "=" + self.encodeToPercentEscapeString(_param_values[i])!;
+                    _urlString += self.encodeToPercentEscapeString(input: _param_keys[i])! + "=" + self.encodeToPercentEscapeString(input: _param_values[i])!
                 }
             }
         }
         
         // Log URL while debugging
         #if arch(i386) || arch(x86_64)
-            NSLog("%@", _urlString);
+            NSLog("%@", _urlString)
         #endif
         
         // Create NSURL and NSURLRequest
-        let _url = NSURL(string: _urlString)!;
-        var _req: NSURLRequest;
+        let _url = NSURL(string: _urlString)!
+        var _req: URLRequest
         
         // Set timeoutInterval
         if let _timeoutInterval = timeoutInterval {
-            _req = NSURLRequest(URL: _url, cachePolicy: NSURLRequestCachePolicy.UseProtocolCachePolicy, timeoutInterval: _timeoutInterval);
+            _req = URLRequest(url: _url as URL, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: _timeoutInterval)
         } else {
-            _req = NSURLRequest(URL: _url, cachePolicy: NSURLRequestCachePolicy.UseProtocolCachePolicy, timeoutInterval: FLDefaultTimeoutInterval);
+            _req = URLRequest(url: _url as URL, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: FLDefaultTimeoutInterval)
         }
         
         // Send request
-        NSURLConnection.sendAsynchronousRequest(_req, queue: NSOperationQueue.mainQueue(), completionHandler: completionHandler)
+        NSURLConnection.sendAsynchronousRequest(_req as URLRequest, queue: OperationQueue.main, completionHandler: completionHandler)
     }
 }
